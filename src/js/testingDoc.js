@@ -10,4 +10,12 @@ export default class MyClass {
   sum(a, b){
     return a + b;
   }
+  /**
+   * @param {number} a - this is a value.
+   * @param {number} b - this is a value.
+   * @return {number} result of the quotient value.
+   */
+  div(a, b){
+    return a / b;
+  }
 }
