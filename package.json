@@ -1,0 +1,22 @@
+{
+  "name": "sitka",
+  "version": "1.0.0",
+  "description": "A learning tool for command line.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joelpeckham/Sitka.git"
+  },
+  "author": "Joel Peckham",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/joelpeckham/Sitka/issues"
+  },
+  "homepage": "https://github.com/joelpeckham/Sitka#readme",
+  "devDependencies": {
+    "electron": "^8.0.2"
+  }
+}
