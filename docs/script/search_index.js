@@ -300,6 +300,12 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
+    "src/js/testingdoc.js~myclass#mult",
+    "class/src/js/testingDoc.js~MyClass.html#instance-method-mult",
+    "src/js/testingDoc.js~MyClass#mult",
+    "method"
+  ],
+  [
     "src/js/testingdoc.js~myclass#sum",
     "class/src/js/testingDoc.js~MyClass.html#instance-method-sum",
     "src/js/testingDoc.js~MyClass#sum",

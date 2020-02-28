@@ -619,7 +619,7 @@
     "__docId__": 51,
     "kind": "file",
     "name": "src/js/testingDoc.js",
-    "content": "/**\n * this is MyClass.\n */\nexport default class MyClass {\n  /**\n   * @param {number} a - this is a value.\n   * @param {number} b - this is a value.\n   * @return {number} result of the sum value.\n   */\n  sum(a, b){\n    return a + b;\n  }\n}\n",
+    "content": "/**\n * this is MyClass.\n */\nexport default class MyClass {\n  /**\n   * @param {number} a - this is a value.\n   * @param {number} b - this is a value.\n   * @return {number} result of the sum value.\n   */\n  sum(a, b){\n    return a + b;\n  }\n\n  /**\n   * @param {number} a - this is a value.\n   * @param {number} b - this is a value.\n   * @return {number} result of the product value.\n   */\n  mult(a, b){\n    return a + b;\n  }\n}\n",
     "static": true,
     "longname": "/Users/joelpeckham/Documents/Sitka/src/js/testingDoc.js",
     "access": "public",
@@ -682,6 +682,49 @@
       ],
       "spread": false,
       "description": "result of the sum value."
+    }
+  },
+  {
+    "__docId__": 54,
+    "kind": "method",
+    "name": "mult",
+    "memberof": "src/js/testingDoc.js~MyClass",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/js/testingDoc.js~MyClass#mult",
+    "access": "public",
+    "description": "",
+    "lineNumber": 19,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "a",
+        "description": "this is a value."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "b",
+        "description": "this is a value."
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "number"
+      ],
+      "spread": false,
+      "description": "result of the product value."
     }
   },
   {
