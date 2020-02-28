@@ -1,5 +1,11 @@
 window.esdocSearchIndex = [
   [
+    "sitka/src/js/testingdoc.js~myclass",
+    "class/src/js/testingDoc.js~MyClass.html",
+    "<span>MyClass</span> <span class=\"search-result-import-path\">sitka/src/js/testingDoc.js</span>",
+    "class"
+  ],
+  [
     "src/.external-ecmascript.js~array",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
     "src/.external-ecmascript.js~Array",
@@ -286,5 +292,17 @@ window.esdocSearchIndex = [
     "file/src/js/main.js.html",
     "src/js/main.js",
     "file"
+  ],
+  [
+    "src/js/testingdoc.js",
+    "file/src/js/testingDoc.js.html",
+    "src/js/testingDoc.js",
+    "file"
+  ],
+  [
+    "src/js/testingdoc.js~myclass#sum",
+    "class/src/js/testingDoc.js~MyClass.html#instance-method-sum",
+    "src/js/testingDoc.js~MyClass#sum",
+    "method"
   ]
 ]
