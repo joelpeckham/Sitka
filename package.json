@@ -4,7 +4,8 @@
   "description": "A learning tool for command line.",
   "main": "src/js/main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "docs": "./node_modules/.bin/esdoc"
   },
   "repository": {
     "type": "git",
