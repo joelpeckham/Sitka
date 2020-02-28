@@ -2,7 +2,7 @@
   "name": "sitka",
   "version": "1.0.0",
   "description": "A learning tool for command line.",
-  "main": "main.js",
+  "main": "src/js/main.js",
   "scripts": {
     "start": "electron ."
   },
