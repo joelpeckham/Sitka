@@ -280,5 +280,11 @@ window.esdocSearchIndex = [
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined",
     "src/.external-ecmascript.js~undefined",
     "external"
+  ],
+  [
+    "src/js/main.js",
+    "file/src/js/main.js.html",
+    "src/js/main.js",
+    "file"
   ]
 ]
