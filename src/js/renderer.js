@@ -13,7 +13,12 @@ const ptyProcess = pty.spawn(shell, [], {
 });
 
 // Initialize xterm.js and attach it to the DOM
-const xterm = new Terminal();
+const xterm = new Terminal({
+                          cursorStyle:'bar',
+											    fontSize:13,fontFamily:"'IBM Plex Mono', monospace",
+													allowTransparency:true,
+													theme:{background: 'rgba(255, 255, 255, 0.0)'}
+												  });
 xterm.open(document.getElementById('xterm'));
 
 // Setup communication between xterm.js and node-pty
