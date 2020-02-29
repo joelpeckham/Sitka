@@ -17,6 +17,7 @@ console.log(BrowserWindow)
 /**
  * Filesystem object. Used to make fake home directory for node-PTY to use.
  * Methods at https://www.npmjs.com/package/fs-extra
+ * @type {Object}
  */
 let fs = require('fs-extra');
 /**

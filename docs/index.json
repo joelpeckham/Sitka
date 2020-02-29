@@ -567,7 +567,7 @@
     "__docId__": 48,
     "kind": "file",
     "name": "src/js/main.js",
-    "content": "/**\n * app is the main Electron app object.\n * @type {Object}\n */\nconst { app } = require('electron')\n\n/**\n * BrowserWindow a class for creating windows in Electron.\n * @type {Function}\n */\nconst { BrowserWindow } = require('electron')\n\nconsole.log(app)\nconsole.log(BrowserWindow)\n// Create Home Folder\n\n/**\n * Filesystem object. Used to make fake home directory for node-PTY to use.\n * Methods at https://www.npmjs.com/package/fs-extra\n */\nlet fs = require('fs-extra');\n/**\n * String storing path of fake home directory.\n */\nconst dir = './Home'\ntry {\n  fs.mkdirSync(dir)\n}\ncatch (err){\n  console.error(err)\n  if (err.code == \"EEXIST\"){\n    console.log(\"\\n\\n --- Removing File...\")\n    fs.remove(dir).then(() => {\n      console.log(\"\\n\\n --- Trying again...\")\n      fs.mkdirSync(dir)\n    }).catch(err => {\n      console.error(err)\n    })\n  }\n}\n\n/**\n * Electron createWindow function called when app.whenReady() resolves.\n * This method will be called when Electron has finished initialization and is ready to create browser windows.\n * Some APIs can only be used after this event occurs.\n * @return {None} Function returns nothing.\n */\nfunction createWindow () {\n  const win = new BrowserWindow({\n    width: 800,\n    height: 600,\n    webPreferences: {\n      nodeIntegration: true\n    }\n  })\n\n  // and load the index.html of the app.\n  win.loadFile('src/html/index.html')\n\n  // Open the DevTools.\n  // win.webContents.openDevTools()\n}\n\n// This method will be called when Electron has finished\n// initialization and is ready to create browser windows.\n// Some APIs can only be used after this event occurs.\napp.whenReady().then(createWindow)\n\n// Quit when all windows are closed.\napp.on('window-all-closed', () => {\n  // On macOS it is common for applications and their menu bar\n  // to stay active until the user quits explicitly with Cmd + Q\n  if (process.platform !== 'darwin') {\n    app.quit()\n  }\n})\n\napp.on('activate', () => {\n  // On macOS it's common to re-create a window in the app when the\n  // dock icon is clicked and there are no other windows open.\n  if (BrowserWindow.getAllWindows().length === 0) {\n    createWindow()\n  }\n})\n\n// In this file you can include the rest of your app's specific main process\n// code. You can also put them in separate files and require them here.\n",
+    "content": "/**\n * app is the main Electron app object.\n * @type {Object}\n */\nconst { app } = require('electron')\n\n/**\n * BrowserWindow a class for creating windows in Electron.\n * @type {Function}\n */\nconst { BrowserWindow } = require('electron')\n\nconsole.log(app)\nconsole.log(BrowserWindow)\n// Create Home Folder\n\n/**\n * Filesystem object. Used to make fake home directory for node-PTY to use.\n * Methods at https://www.npmjs.com/package/fs-extra\n * @type {Object}\n */\nlet fs = require('fs-extra');\n/**\n * String storing path of fake home directory.\n */\nconst dir = './Home'\ntry {\n  fs.mkdirSync(dir)\n}\ncatch (err){\n  console.error(err)\n  if (err.code == \"EEXIST\"){\n    console.log(\"\\n\\n --- Removing File...\")\n    fs.remove(dir).then(() => {\n      console.log(\"\\n\\n --- Trying again...\")\n      fs.mkdirSync(dir)\n    }).catch(err => {\n      console.error(err)\n    })\n  }\n}\n\n/**\n * Electron createWindow function called when app.whenReady() resolves.\n * This method will be called when Electron has finished initialization and is ready to create browser windows.\n * Some APIs can only be used after this event occurs.\n * @return {None} Function returns nothing.\n */\nfunction createWindow () {\n  const win = new BrowserWindow({\n    width: 800,\n    height: 600,\n    webPreferences: {\n      nodeIntegration: true\n    }\n  })\n\n  // and load the index.html of the app.\n  win.loadFile('src/html/index.html')\n\n  // Open the DevTools.\n  // win.webContents.openDevTools()\n}\n\n// This method will be called when Electron has finished\n// initialization and is ready to create browser windows.\n// Some APIs can only be used after this event occurs.\napp.whenReady().then(createWindow)\n\n// Quit when all windows are closed.\napp.on('window-all-closed', () => {\n  // On macOS it is common for applications and their menu bar\n  // to stay active until the user quits explicitly with Cmd + Q\n  if (process.platform !== 'darwin') {\n    app.quit()\n  }\n})\n\napp.on('activate', () => {\n  // On macOS it's common to re-create a window in the app when the\n  // dock icon is clicked and there are no other windows open.\n  if (BrowserWindow.getAllWindows().length === 0) {\n    createWindow()\n  }\n})\n\n// In this file you can include the rest of your app's specific main process\n// code. You can also put them in separate files and require them here.\n",
     "static": true,
     "longname": "/Users/joelpeckham/Documents/Sitka/src/js/main.js",
     "access": "public",
@@ -630,11 +630,14 @@
     "importPath": "sitka",
     "importStyle": null,
     "description": "Filesystem object. Used to make fake home directory for node-PTY to use.\nMethods at https://www.npmjs.com/package/fs-extra",
-    "lineNumber": 21,
+    "lineNumber": 22,
     "type": {
+      "nullable": null,
       "types": [
-        "*"
-      ]
+        "Object"
+      ],
+      "spread": false,
+      "description": null
     }
   },
   {
@@ -649,7 +652,7 @@
     "importPath": "sitka",
     "importStyle": null,
     "description": "String storing path of fake home directory.",
-    "lineNumber": 25,
+    "lineNumber": 26,
     "type": {
       "types": [
         "string"
@@ -670,7 +673,7 @@
     "importPath": "sitka",
     "importStyle": null,
     "description": "Electron createWindow function called when app.whenReady() resolves.\nThis method will be called when Electron has finished initialization and is ready to create browser windows.\nSome APIs can only be used after this event occurs.",
-    "lineNumber": 48,
+    "lineNumber": 49,
     "return": {
       "nullable": null,
       "types": [
