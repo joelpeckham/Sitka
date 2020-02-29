@@ -28,14 +28,14 @@ try {
   fs.mkdirSync(dir)
 }
 catch (err){
-  console.error(err)
+  //console.error(err)
   if (err.code == "EEXIST"){
     console.log("\n\n --- Removing File...")
     fs.remove(dir).then(() => {
       console.log("\n\n --- Trying again...")
       fs.mkdirSync(dir)
     }).catch(err => {
-      console.error(err)
+      //console.error(err)
     })
   }
 }
