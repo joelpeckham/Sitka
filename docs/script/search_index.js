@@ -6,18 +6,6 @@ window.esdocSearchIndex = [
     "variable"
   ],
   [
-    "sitka/src/js/renderer.js~shellterminallinkingmanager",
-    "variable/index.html#static-variable-ShellTerminalLinkingManager",
-    "<span>ShellTerminalLinkingManager</span> <span class=\"search-result-import-path\">sitka/src/js/renderer.js</span>",
-    "variable"
-  ],
-  [
-    "sitka/src/js/renderer.js~terminal",
-    "variable/index.html#static-variable-Terminal",
-    "<span>Terminal</span> <span class=\"search-result-import-path\">sitka/src/js/renderer.js</span>",
-    "variable"
-  ],
-  [
     "sitka~app",
     "variable/index.html#static-variable-app",
     "<span>app</span> <span class=\"search-result-import-path\">sitka</span>",
@@ -30,27 +18,15 @@ window.esdocSearchIndex = [
     "function"
   ],
   [
-    "sitka/src/js/renderer.js~dataflow",
-    "variable/index.html#static-variable-dataFlow",
-    "<span>dataFlow</span> <span class=\"search-result-import-path\">sitka/src/js/renderer.js</span>",
-    "variable"
-  ],
-  [
     "sitka~dir",
     "variable/index.html#static-variable-dir",
     "<span>dir</span> <span class=\"search-result-import-path\">sitka</span>",
     "variable"
   ],
   [
-    "sitka/src/js/renderer.js~env",
-    "variable/index.html#static-variable-env",
-    "<span>env</span> <span class=\"search-result-import-path\">sitka/src/js/renderer.js</span>",
-    "variable"
-  ],
-  [
-    "sitka/src/js/terminalmanager.js~exports",
-    "class/src/js/TerminalManager.js~exports.html",
-    "<span>exports</span> <span class=\"search-result-import-path\">sitka/src/js/TerminalManager.js</span>",
+    "sitka/src/js/commandline.js~exports",
+    "class/src/js/CommandLine.js~exports.html",
+    "<span>exports</span> <span class=\"search-result-import-path\">sitka/src/js/CommandLine.js</span>",
     "class"
   ],
   [
@@ -60,34 +36,10 @@ window.esdocSearchIndex = [
     "variable"
   ],
   [
-    "sitka/src/js/renderer.js~os",
-    "variable/index.html#static-variable-os",
-    "<span>os</span> <span class=\"search-result-import-path\">sitka/src/js/renderer.js</span>",
-    "variable"
-  ],
-  [
-    "sitka/src/js/renderer.js~pty",
-    "variable/index.html#static-variable-pty",
-    "<span>pty</span> <span class=\"search-result-import-path\">sitka/src/js/renderer.js</span>",
-    "variable"
-  ],
-  [
-    "sitka/src/js/renderer.js~ptyprocess",
-    "variable/index.html#static-variable-ptyProcess",
-    "<span>ptyProcess</span> <span class=\"search-result-import-path\">sitka/src/js/renderer.js</span>",
-    "variable"
-  ],
-  [
-    "sitka/src/js/renderer.js~shell",
-    "variable/index.html#static-variable-shell",
-    "<span>shell</span> <span class=\"search-result-import-path\">sitka/src/js/renderer.js</span>",
-    "variable"
-  ],
-  [
-    "sitka/src/js/renderer.js~xterm",
-    "variable/index.html#static-variable-xterm",
-    "<span>xterm</span> <span class=\"search-result-import-path\">sitka/src/js/renderer.js</span>",
-    "variable"
+    "sitka/src/js/renderer.js~renderlogic",
+    "function/index.html#static-function-renderLogic",
+    "<span>renderLogic</span> <span class=\"search-result-import-path\">sitka/src/js/renderer.js</span>",
+    "function"
   ],
   [
     "src/.external-ecmascript.js~array",
@@ -372,45 +324,51 @@ window.esdocSearchIndex = [
     "external"
   ],
   [
-    "src/js/terminalmanager.js",
-    "file/src/js/TerminalManager.js.html",
-    "src/js/TerminalManager.js",
+    "src/js/commandline.js",
+    "file/src/js/CommandLine.js.html",
+    "src/js/CommandLine.js",
     "file"
   ],
   [
-    "src/js/terminalmanager.js~exports#constructor",
-    "class/src/js/TerminalManager.js~exports.html#instance-constructor-constructor",
-    "src/js/TerminalManager.js~exports#constructor",
+    "src/js/commandline.js~exports#constructor",
+    "class/src/js/CommandLine.js~exports.html#instance-constructor-constructor",
+    "src/js/CommandLine.js~exports#constructor",
     "method"
   ],
   [
-    "src/js/terminalmanager.js~exports#examineshelldata",
-    "class/src/js/TerminalManager.js~exports.html#instance-method-examineShellData",
-    "src/js/TerminalManager.js~exports#examineShellData",
-    "method"
-  ],
-  [
-    "src/js/terminalmanager.js~exports#onshelldata",
-    "class/src/js/TerminalManager.js~exports.html#instance-method-onShellData",
-    "src/js/TerminalManager.js~exports#onShellData",
-    "method"
-  ],
-  [
-    "src/js/terminalmanager.js~exports#ontermdata",
-    "class/src/js/TerminalManager.js~exports.html#instance-method-onTermData",
-    "src/js/TerminalManager.js~exports#onTermData",
-    "method"
-  ],
-  [
-    "src/js/terminalmanager.js~exports#shell",
-    "class/src/js/TerminalManager.js~exports.html#instance-member-shell",
-    "src/js/TerminalManager.js~exports#shell",
+    "src/js/commandline.js~exports#lfc",
+    "class/src/js/CommandLine.js~exports.html#instance-member-lfc",
+    "src/js/CommandLine.js~exports#lfc",
     "member"
   ],
   [
-    "src/js/terminalmanager.js~exports#term",
-    "class/src/js/TerminalManager.js~exports.html#instance-member-term",
-    "src/js/TerminalManager.js~exports#term",
+    "src/js/commandline.js~exports#os",
+    "class/src/js/CommandLine.js~exports.html#instance-member-os",
+    "src/js/CommandLine.js~exports#os",
+    "member"
+  ],
+  [
+    "src/js/commandline.js~exports#prompt",
+    "class/src/js/CommandLine.js~exports.html#instance-method-prompt",
+    "src/js/CommandLine.js~exports#prompt",
+    "method"
+  ],
+  [
+    "src/js/commandline.js~exports#pty",
+    "class/src/js/CommandLine.js~exports.html#instance-member-pty",
+    "src/js/CommandLine.js~exports#pty",
+    "member"
+  ],
+  [
+    "src/js/commandline.js~exports#python",
+    "class/src/js/CommandLine.js~exports.html#instance-method-python",
+    "src/js/CommandLine.js~exports#python",
+    "method"
+  ],
+  [
+    "src/js/commandline.js~exports#term",
+    "class/src/js/CommandLine.js~exports.html#instance-member-term",
+    "src/js/CommandLine.js~exports#term",
     "member"
   ],
   [

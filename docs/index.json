@@ -566,10 +566,10 @@
   {
     "__docId__": 48,
     "kind": "file",
-    "name": "src/js/TerminalManager.js",
-    "content": "module.exports = class TerminalManager {\n  constructor(ptyProcessObject, xTermProcessObject) {\n    this.shell = ptyProcessObject;\n    this.term = xTermProcessObject;\n\n    this.term.onData(data => this.onTermData(data));\n    this.shell.on('data', data => this.onShellData(data));\n  }\n\n  onTermData(data){\n    this.shell.write(data);\n  }\n\n  onShellData(data){\n      this.term.write(data)\n  }\n\n  examineShellData(data){\n\n  }\n}\n",
+    "name": "src/js/CommandLine.js",
+    "content": "module.exports = class CommandLine {\n  constructor(domElement, xTermOptionObject) {\n    let Terminal = require('xterm').Terminal;\n    this.lfc = 0\n    this.os = require('os');\n    this.pty = require('node-pty');\n    this.term =  new Terminal(xTermOptionObject);\n    this.term.open(domElement);\n  }\n\n  prompt(prompt){\n    this.term.writeln(prompt)\n  }\n\n  async python(){\n    this.prompt(\"\\n\"+\"-\".repeat(this.term.cols))\n    console.log(\"I'm here!\")\n    let env = { HOME: process.cwd() + \"/Home\"}\n    let shellname = process.env[this.os.platform() === 'win32' ? 'COMSPEC' : 'SHELL'];\n    let shell = this.pty.spawn(shellname, [], {\n      cols: 80, rows: 30,\n      cwd: process.cwd() + \"/Home\",\n      env: env,\n      handleFlowControl: true\n    });\n    this.term.onData(data => {shell.write(data); lastData = data});\n    shell.write('python3\\n')\n\n    let ansLog = null\n    var lastData = null\n    let seenPrompt = 0;\n\n    let answer = await new Promise ((resolve, reject) => {\n      shell.on('data', data => {\n        if (data.endsWith(\">>> \") && data != lastData) {\n          seenPrompt++\n        }\n        if (seenPrompt == 1) {\n          this.term.write(data);\n          if (data.endsWith(\"\\n\") && !data.startsWith('...')){\n            ansLog = data\n          }\n        }\n        if (seenPrompt > 1) {\n          resolve(ansLog);\n        }\n      });\n    });\n    this.prompt(\"\\n\"+\"-\".repeat(this.term.cols))\n    return answer\n  }\n}\n",
     "static": true,
-    "longname": "/Users/joelpeckham/Documents/Sitka/src/js/TerminalManager.js",
+    "longname": "/Users/joelpeckham/Documents/Sitka/src/js/CommandLine.js",
     "access": "public",
     "description": null,
     "lineNumber": 1
@@ -578,12 +578,12 @@
     "__docId__": 49,
     "kind": "class",
     "name": "exports",
-    "memberof": "src/js/TerminalManager.js",
+    "memberof": "src/js/CommandLine.js",
     "static": true,
-    "longname": "src/js/TerminalManager.js~exports",
+    "longname": "src/js/CommandLine.js~exports",
     "access": "public",
     "export": false,
-    "importPath": "sitka/src/js/TerminalManager.js",
+    "importPath": "sitka/src/js/CommandLine.js",
     "importStyle": null,
     "description": null,
     "lineNumber": 1,
@@ -594,11 +594,11 @@
     "__docId__": 50,
     "kind": "constructor",
     "name": "constructor",
-    "memberof": "src/js/TerminalManager.js~exports",
+    "memberof": "src/js/CommandLine.js~exports",
     "generator": false,
     "async": false,
     "static": false,
-    "longname": "src/js/TerminalManager.js~exports#constructor",
+    "longname": "src/js/CommandLine.js~exports#constructor",
     "access": "public",
     "description": null,
     "lineNumber": 2,
@@ -607,30 +607,30 @@
   {
     "__docId__": 51,
     "kind": "member",
-    "name": "shell",
-    "memberof": "src/js/TerminalManager.js~exports",
+    "name": "lfc",
+    "memberof": "src/js/CommandLine.js~exports",
     "static": false,
-    "longname": "src/js/TerminalManager.js~exports#shell",
+    "longname": "src/js/CommandLine.js~exports#lfc",
     "access": "public",
     "description": null,
-    "lineNumber": 3,
+    "lineNumber": 4,
     "undocument": true,
     "type": {
       "types": [
-        "*"
+        "number"
       ]
     }
   },
   {
     "__docId__": 52,
     "kind": "member",
-    "name": "term",
-    "memberof": "src/js/TerminalManager.js~exports",
+    "name": "os",
+    "memberof": "src/js/CommandLine.js~exports",
     "static": false,
-    "longname": "src/js/TerminalManager.js~exports#term",
+    "longname": "src/js/CommandLine.js~exports#os",
     "access": "public",
     "description": null,
-    "lineNumber": 4,
+    "lineNumber": 5,
     "undocument": true,
     "type": {
       "types": [
@@ -640,66 +640,54 @@
   },
   {
     "__docId__": 53,
-    "kind": "method",
-    "name": "onTermData",
-    "memberof": "src/js/TerminalManager.js~exports",
-    "generator": false,
-    "async": false,
+    "kind": "member",
+    "name": "pty",
+    "memberof": "src/js/CommandLine.js~exports",
     "static": false,
-    "longname": "src/js/TerminalManager.js~exports#onTermData",
+    "longname": "src/js/CommandLine.js~exports#pty",
     "access": "public",
     "description": null,
-    "lineNumber": 10,
+    "lineNumber": 6,
     "undocument": true,
-    "params": [
-      {
-        "name": "data",
-        "types": [
-          "*"
-        ]
-      }
-    ],
-    "return": null
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
   },
   {
     "__docId__": 54,
-    "kind": "method",
-    "name": "onShellData",
-    "memberof": "src/js/TerminalManager.js~exports",
-    "generator": false,
-    "async": false,
+    "kind": "member",
+    "name": "term",
+    "memberof": "src/js/CommandLine.js~exports",
     "static": false,
-    "longname": "src/js/TerminalManager.js~exports#onShellData",
+    "longname": "src/js/CommandLine.js~exports#term",
     "access": "public",
     "description": null,
-    "lineNumber": 14,
+    "lineNumber": 7,
     "undocument": true,
-    "params": [
-      {
-        "name": "data",
-        "types": [
-          "*"
-        ]
-      }
-    ],
-    "return": null
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
   },
   {
     "__docId__": 55,
     "kind": "method",
-    "name": "examineShellData",
-    "memberof": "src/js/TerminalManager.js~exports",
+    "name": "prompt",
+    "memberof": "src/js/CommandLine.js~exports",
     "generator": false,
     "async": false,
     "static": false,
-    "longname": "src/js/TerminalManager.js~exports#examineShellData",
+    "longname": "src/js/CommandLine.js~exports#prompt",
     "access": "public",
     "description": null,
-    "lineNumber": 18,
+    "lineNumber": 11,
     "undocument": true,
     "params": [
       {
-        "name": "data",
+        "name": "prompt",
         "types": [
           "*"
         ]
@@ -709,9 +697,29 @@
   },
   {
     "__docId__": 56,
+    "kind": "method",
+    "name": "python",
+    "memberof": "src/js/CommandLine.js~exports",
+    "generator": false,
+    "async": true,
+    "static": false,
+    "longname": "src/js/CommandLine.js~exports#python",
+    "access": "public",
+    "description": null,
+    "lineNumber": 15,
+    "undocument": true,
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 57,
     "kind": "file",
     "name": "src/js/main.js",
-    "content": "/**\n * app is the main Electron app object.\n * @type {Object}\n */\nconst { app } = require('electron')\n\n/**\n * BrowserWindow a class for creating windows in Electron.\n * @type {Function}\n */\nconst { BrowserWindow } = require('electron')\n\nconsole.log(app)\nconsole.log(BrowserWindow)\n// Create Home Folder\n\n/**\n * Filesystem object. Used to make fake home directory for node-PTY to use.\n * Methods at https://www.npmjs.com/package/fs-extra\n * @type {Object}\n */\nlet fs = require('fs-extra');\n/**\n * String storing path of fake home directory.\n */\nconst dir = './Home'\ntry {\n  fs.mkdirSync(dir)\n}\ncatch (err){\n  console.error(err)\n  if (err.code == \"EEXIST\"){\n    console.log(\"\\n\\n --- Removing File...\")\n    fs.remove(dir).then(() => {\n      console.log(\"\\n\\n --- Trying again...\")\n      fs.mkdirSync(dir)\n    }).catch(err => {\n      console.error(err)\n    })\n  }\n}\n\n/**\n * Electron createWindow function called when app.whenReady() resolves.\n * This method will be called when Electron has finished initialization and is ready to create browser windows.\n * Some APIs can only be used after this event occurs.\n * @return {None} Function returns nothing.\n */\nfunction createWindow () {\n  const win = new BrowserWindow({\n    width: 800,\n    height: 600,\n    webPreferences: {\n      nodeIntegration: true\n    }\n  })\n\n  // and load the index.html of the app.\n  win.loadFile('src/html/index.html')\n\n  // Open the DevTools.\n  // win.webContents.openDevTools()\n}\n\n// This method will be called when Electron has finished\n// initialization and is ready to create browser windows.\n// Some APIs can only be used after this event occurs.\napp.whenReady().then(createWindow)\n\n// Quit when all windows are closed.\napp.on('window-all-closed', () => {\n  // On macOS it is common for applications and their menu bar\n  // to stay active until the user quits explicitly with Cmd + Q\n  if (process.platform !== 'darwin') {\n    app.quit()\n  }\n})\n\napp.on('activate', () => {\n  // On macOS it's common to re-create a window in the app when the\n  // dock icon is clicked and there are no other windows open.\n  if (BrowserWindow.getAllWindows().length === 0) {\n    createWindow()\n  }\n})\n\n// In this file you can include the rest of your app's specific main process\n// code. You can also put them in separate files and require them here.\n",
+    "content": "/**\n * app is the main Electron app object.\n * @type {Object}\n */\nconst { app } = require('electron')\n\n/**\n * BrowserWindow a class for creating windows in Electron.\n * @type {Function}\n */\nconst { BrowserWindow } = require('electron')\n\nconsole.log(app)\nconsole.log(BrowserWindow)\n// Create Home Folder\n\n/**\n * Filesystem object. Used to make fake home directory for node-PTY to use.\n * Methods at https://www.npmjs.com/package/fs-extra\n * @type {Object}\n */\nlet fs = require('fs-extra');\n/**\n * String storing path of fake home directory.\n */\nconst dir = './Home'\ntry {\n  fs.mkdirSync(dir)\n}\ncatch (err){\n  //console.error(err)\n  if (err.code == \"EEXIST\"){\n    console.log(\"\\n\\n --- Removing File...\")\n    fs.remove(dir).then(() => {\n      console.log(\"\\n\\n --- Trying again...\")\n      fs.mkdirSync(dir)\n    }).catch(err => {\n      //console.error(err)\n    })\n  }\n}\n\n/**\n * Electron createWindow function called when app.whenReady() resolves.\n * This method will be called when Electron has finished initialization and is ready to create browser windows.\n * Some APIs can only be used after this event occurs.\n * @return {None} Function returns nothing.\n */\nfunction createWindow () {\n  const win = new BrowserWindow({\n    width: 800,\n    height: 600,\n    webPreferences: {\n      nodeIntegration: true\n    }\n  })\n\n  // and load the index.html of the app.\n  win.loadFile('src/html/index.html')\n\n  // Open the DevTools.\n  // win.webContents.openDevTools()\n}\n\n// This method will be called when Electron has finished\n// initialization and is ready to create browser windows.\n// Some APIs can only be used after this event occurs.\napp.whenReady().then(createWindow)\n\n// Quit when all windows are closed.\napp.on('window-all-closed', () => {\n  // On macOS it is common for applications and their menu bar\n  // to stay active until the user quits explicitly with Cmd + Q\n  if (process.platform !== 'darwin') {\n    app.quit()\n  }\n})\n\napp.on('activate', () => {\n  // On macOS it's common to re-create a window in the app when the\n  // dock icon is clicked and there are no other windows open.\n  if (BrowserWindow.getAllWindows().length === 0) {\n    createWindow()\n  }\n})\n\n// In this file you can include the rest of your app's specific main process\n// code. You can also put them in separate files and require them here.\n",
     "static": true,
     "longname": "/Users/joelpeckham/Documents/Sitka/src/js/main.js",
     "access": "public",
@@ -719,7 +727,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 57,
+    "__docId__": 58,
     "kind": "variable",
     "name": "app",
     "memberof": "src/js/main.js",
@@ -741,7 +749,7 @@
     }
   },
   {
-    "__docId__": 58,
+    "__docId__": 59,
     "kind": "variable",
     "name": "BrowserWindow",
     "memberof": "src/js/main.js",
@@ -763,7 +771,7 @@
     }
   },
   {
-    "__docId__": 59,
+    "__docId__": 60,
     "kind": "variable",
     "name": "fs",
     "memberof": "src/js/main.js",
@@ -785,7 +793,7 @@
     }
   },
   {
-    "__docId__": 60,
+    "__docId__": 61,
     "kind": "variable",
     "name": "dir",
     "memberof": "src/js/main.js",
@@ -804,7 +812,7 @@
     }
   },
   {
-    "__docId__": 61,
+    "__docId__": 62,
     "kind": "function",
     "name": "createWindow",
     "memberof": "src/js/main.js",
@@ -829,10 +837,10 @@
     "params": []
   },
   {
-    "__docId__": 62,
+    "__docId__": 63,
     "kind": "file",
     "name": "src/js/renderer.js",
-    "content": "/**\n * os is an Electron object for operating system interaction.\n * @type {Object}\n */\nlet os = require('os');\n\n/**\n * pty is an object used to spawn and interact with a shell on the user's system.\n * @type {Object}\n */\nlet pty = require('node-pty');\n\n/**\n * Terminal is a class used to create xTerm terminal objects.\n * @type {Function}\n */\nlet Terminal = require('xterm').Terminal;\n\n/**\n * shell holds the path to the shell to be spawned by node-pty.\n * @type {String}\n */\nconst shell = process.env[os.platform() === 'win32' ? 'COMSPEC' : 'SHELL'];\n\n/**\n * env holds the environment variables for node-pty\n * @type {Object}\n */\nlet env = {\n  HOME: process.cwd() + \"/Home\"\n}\n\n/**\n * ptyProcess is the node-pty shell object.\n * This object is used to interact with the pty shell.\n * @type {Object}\n */\nconst ptyProcess = pty.spawn(shell, [], {\n  name: 'xterm-color',\n  cols: 80,\n  rows: 30,\n  cwd: process.cwd() + \"/Home\",\n  env: env,\n  handleFlowControl: false\n});\n\n\n// Initialize xterm.js and attach it to the DOM\n\n/**\n * xterm is the xTerm object.\n * This is used to create the xTerm UI element.\n * @type {Object}\n */\nconst xterm = new Terminal({\n                          cursorStyle:'bar',\n                          cols: 80,\n                          rows: 30,\n\t\t\t\t\t\t\t\t\t\t\t    fontSize:13,fontFamily:\"'IBM Plex Mono', monospace\",\n\t\t\t\t\t\t\t\t\t\t\t\t\tallowTransparency:true,\n\t\t\t\t\t\t\t\t\t\t\t\t\ttheme:{background: 'rgba(255, 255, 255, 0.0)'}\n\t\t\t\t\t\t\t\t\t\t\t\t  });\nxterm.open(document.getElementById('xterm'));\n\nlet ShellTerminalLinkingManager = require(\"./TerminalManager.js\");\nconst dataFlow = new ShellTerminalLinkingManager(ptyProcess, xterm)\n",
+    "content": "async function renderLogic() {\n  let CommandLine = require(\"./CommandLine.js\");\n  const cmd = new CommandLine(document.getElementById('xterm'), {\n    cursorStyle:'bar',\n    cols: 80,\n    rows: 30,\n    fontSize:13,fontFamily:\"'IBM Plex Mono', monospace\",\n  \tallowTransparency:true,\n  \ttheme:{background: 'rgba(255, 255, 255, 0.0)'}\n  });\n  cmd.prompt(\"Hello, Joel. I'm Sika.\")\n  cmd.prompt(\"In the python prompt, type an expression that results in: range(0, 10)\")\n  while (true){\n    answer = await cmd.python()\n    console.log(answer)\n    if( answer.trim() == \"range(0, 10)\"){\n      cmd.prompt(\"\\nWow! That's correct!\")\n      break\n    }\n    else{\n      cmd.prompt(\"\\nNope. Try again.\")\n    }\n  }\n  cmd.prompt(\"Here's another prompt.\")\n  another = await cmd.python()\n}\n\n// call the main function\nrenderLogic();\n",
     "static": true,
     "longname": "/Users/joelpeckham/Documents/Sitka/src/js/renderer.js",
     "access": "public",
@@ -840,196 +848,23 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 63,
-    "kind": "variable",
-    "name": "os",
-    "memberof": "src/js/renderer.js",
-    "static": true,
-    "longname": "src/js/renderer.js~os",
-    "access": "public",
-    "export": false,
-    "importPath": "sitka/src/js/renderer.js",
-    "importStyle": null,
-    "description": "os is an Electron object for operating system interaction.",
-    "lineNumber": 5,
-    "type": {
-      "nullable": null,
-      "types": [
-        "Object"
-      ],
-      "spread": false,
-      "description": null
-    }
-  },
-  {
     "__docId__": 64,
-    "kind": "variable",
-    "name": "pty",
+    "kind": "function",
+    "name": "renderLogic",
     "memberof": "src/js/renderer.js",
+    "generator": false,
+    "async": true,
     "static": true,
-    "longname": "src/js/renderer.js~pty",
-    "access": "public",
-    "export": false,
-    "importPath": "sitka/src/js/renderer.js",
-    "importStyle": null,
-    "description": "pty is an object used to spawn and interact with a shell on the user's system.",
-    "lineNumber": 11,
-    "type": {
-      "nullable": null,
-      "types": [
-        "Object"
-      ],
-      "spread": false,
-      "description": null
-    }
-  },
-  {
-    "__docId__": 65,
-    "kind": "variable",
-    "name": "Terminal",
-    "memberof": "src/js/renderer.js",
-    "static": true,
-    "longname": "src/js/renderer.js~Terminal",
-    "access": "public",
-    "export": false,
-    "importPath": "sitka/src/js/renderer.js",
-    "importStyle": null,
-    "description": "Terminal is a class used to create xTerm terminal objects.",
-    "lineNumber": 17,
-    "type": {
-      "nullable": null,
-      "types": [
-        "Function"
-      ],
-      "spread": false,
-      "description": null
-    }
-  },
-  {
-    "__docId__": 66,
-    "kind": "variable",
-    "name": "shell",
-    "memberof": "src/js/renderer.js",
-    "static": true,
-    "longname": "src/js/renderer.js~shell",
-    "access": "public",
-    "export": false,
-    "importPath": "sitka/src/js/renderer.js",
-    "importStyle": null,
-    "description": "shell holds the path to the shell to be spawned by node-pty.",
-    "lineNumber": 23,
-    "type": {
-      "nullable": null,
-      "types": [
-        "String"
-      ],
-      "spread": false,
-      "description": null
-    }
-  },
-  {
-    "__docId__": 67,
-    "kind": "variable",
-    "name": "env",
-    "memberof": "src/js/renderer.js",
-    "static": true,
-    "longname": "src/js/renderer.js~env",
-    "access": "public",
-    "export": false,
-    "importPath": "sitka/src/js/renderer.js",
-    "importStyle": null,
-    "description": "env holds the environment variables for node-pty",
-    "lineNumber": 29,
-    "type": {
-      "nullable": null,
-      "types": [
-        "Object"
-      ],
-      "spread": false,
-      "description": null
-    }
-  },
-  {
-    "__docId__": 68,
-    "kind": "variable",
-    "name": "ptyProcess",
-    "memberof": "src/js/renderer.js",
-    "static": true,
-    "longname": "src/js/renderer.js~ptyProcess",
+    "longname": "src/js/renderer.js~renderLogic",
     "access": "public",
     "export": false,
     "importPath": "sitka/src/js/renderer.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 38,
+    "lineNumber": 1,
     "undocument": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 69,
-    "kind": "variable",
-    "name": "xterm",
-    "memberof": "src/js/renderer.js",
-    "static": true,
-    "longname": "src/js/renderer.js~xterm",
-    "access": "public",
-    "export": false,
-    "importPath": "sitka/src/js/renderer.js",
-    "importStyle": null,
-    "description": "xterm is the xTerm object.\nThis is used to create the xTerm UI element.",
-    "lineNumber": 55,
-    "type": {
-      "nullable": null,
-      "types": [
-        "Object"
-      ],
-      "spread": false,
-      "description": null
-    }
-  },
-  {
-    "__docId__": 70,
-    "kind": "variable",
-    "name": "ShellTerminalLinkingManager",
-    "memberof": "src/js/renderer.js",
-    "static": true,
-    "longname": "src/js/renderer.js~ShellTerminalLinkingManager",
-    "access": "public",
-    "export": false,
-    "importPath": "sitka/src/js/renderer.js",
-    "importStyle": null,
-    "description": null,
-    "lineNumber": 65,
-    "undocument": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 71,
-    "kind": "variable",
-    "name": "dataFlow",
-    "memberof": "src/js/renderer.js",
-    "static": true,
-    "longname": "src/js/renderer.js~dataFlow",
-    "access": "public",
-    "export": false,
-    "importPath": "sitka/src/js/renderer.js",
-    "importStyle": null,
-    "description": null,
-    "lineNumber": 66,
-    "undocument": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    }
+    "params": [],
+    "return": null
   },
   {
     "kind": "index",

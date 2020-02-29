@@ -29,92 +29,47 @@
 <nav class="navigation" data-ice="nav"><div>
   <ul>
     
-  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#js">js</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/js/TerminalManager.js~exports.html">exports</a></span></span></li>
+  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#js">js</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/js/CommandLine.js~exports.html">exports</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-createWindow">createWindow</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-renderLogic">renderLogic</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-BrowserWindow">BrowserWindow</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-app">app</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-dir">dir</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-fs">fs</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ShellTerminalLinkingManager">ShellTerminalLinkingManager</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Terminal">Terminal</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-dataFlow">dataFlow</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-env">env</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-os">os</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-pty">pty</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ptyProcess">ptyProcess</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-shell">shell</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-xterm">xterm</a></span></span></li>
 </ul>
 </div>
 </nav>
 
 <div class="content" data-ice="content"><h1 data-ice="title">src/js/renderer.js</h1>
-<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
- * os is an Electron object for operating system interaction.
- * @type {Object}
- */
-let os = require(&apos;os&apos;);
-
-/**
- * pty is an object used to spawn and interact with a shell on the user&apos;s system.
- * @type {Object}
- */
-let pty = require(&apos;node-pty&apos;);
-
-/**
- * Terminal is a class used to create xTerm terminal objects.
- * @type {Function}
- */
-let Terminal = require(&apos;xterm&apos;).Terminal;
-
-/**
- * shell holds the path to the shell to be spawned by node-pty.
- * @type {String}
- */
-const shell = process.env[os.platform() === &apos;win32&apos; ? &apos;COMSPEC&apos; : &apos;SHELL&apos;];
-
-/**
- * env holds the environment variables for node-pty
- * @type {Object}
- */
-let env = {
-  HOME: process.cwd() + &quot;/Home&quot;
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">async function renderLogic() {
+  let CommandLine = require(&quot;./CommandLine.js&quot;);
+  const cmd = new CommandLine(document.getElementById(&apos;xterm&apos;), {
+    cursorStyle:&apos;bar&apos;,
+    cols: 80,
+    rows: 30,
+    fontSize:13,fontFamily:&quot;&apos;IBM Plex Mono&apos;, monospace&quot;,
+  	allowTransparency:true,
+  	theme:{background: &apos;rgba(255, 255, 255, 0.0)&apos;}
+  });
+  cmd.prompt(&quot;Hello, Joel. I&apos;m Sika.&quot;)
+  cmd.prompt(&quot;In the python prompt, type an expression that results in: range(0, 10)&quot;)
+  while (true){
+    answer = await cmd.python()
+    console.log(answer)
+    if( answer.trim() == &quot;range(0, 10)&quot;){
+      cmd.prompt(&quot;\nWow! That&apos;s correct!&quot;)
+      break
+    }
+    else{
+      cmd.prompt(&quot;\nNope. Try again.&quot;)
+    }
+  }
+  cmd.prompt(&quot;Here&apos;s another prompt.&quot;)
+  another = await cmd.python()
 }
 
-/**
- * ptyProcess is the node-pty shell object.
- * This object is used to interact with the pty shell.
- * @type {Object}
- */
-const ptyProcess = pty.spawn(shell, [], {
-  name: &apos;xterm-color&apos;,
-  cols: 80,
-  rows: 30,
-  cwd: process.cwd() + &quot;/Home&quot;,
-  env: env,
-  handleFlowControl: false
-});
-
-
-// Initialize xterm.js and attach it to the DOM
-
-/**
- * xterm is the xTerm object.
- * This is used to create the xTerm UI element.
- * @type {Object}
- */
-const xterm = new Terminal({
-                          cursorStyle:&apos;bar&apos;,
-                          cols: 80,
-                          rows: 30,
-											    fontSize:13,fontFamily:&quot;&apos;IBM Plex Mono&apos;, monospace&quot;,
-													allowTransparency:true,
-													theme:{background: &apos;rgba(255, 255, 255, 0.0)&apos;}
-												  });
-xterm.open(document.getElementById(&apos;xterm&apos;));
-
-let ShellTerminalLinkingManager = require(&quot;./TerminalManager.js&quot;);
-const dataFlow = new ShellTerminalLinkingManager(ptyProcess, xterm)
+// call the main function
+renderLogic();
 </code></pre>
 
 </div>
