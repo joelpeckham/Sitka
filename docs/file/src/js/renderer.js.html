@@ -2,8 +2,8 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <base data-ice="baseUrl" href>
-  <title data-ice="title">Source | sitka</title>
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">src/js/renderer.js | sitka</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
@@ -33,39 +33,43 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><h1>Source <img data-ice="coverageBadge" src="./badge.svg"><span data-ice="totalCoverageCount" class="total-coverage-count">0/11</span></h1>
+<div class="content" data-ice="content"><h1 data-ice="title">src/js/renderer.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">var os = require(&apos;os&apos;);
+var pty = require(&apos;node-pty&apos;);
+var Terminal = require(&apos;xterm&apos;).Terminal;
 
-<table class="files-summary" data-ice="files" data-use-coverage="true">
-  <thead>
-    <tr>
-      <td>File</td>
-      <td>Identifier</td>
-      <td class="coverage">Document</td>
-      <td style="display: none;">Size</td>
-      <td style="display: none;">Lines</td>
-      <td style="display: none;">Updated</td>
-    </tr>
-  </thead>
-  <tbody>
-    
-  <tr data-ice="file">
-      <td data-ice="filePath"><span><a href="file/src/js/main.js.html#errorLines=1,23,4,5">src/js/main.js</a></span></td>
-      <td data-ice="identifier" class="identifiers">-</td>
-      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/4</span></td>
-      <td style="display: none;" data-ice="size">1606 byte</td>
-      <td style="display: none;" data-ice="lines">63</td>
-      <td style="display: none;" data-ice="updated">2020-02-07 00:46:19 (UTC)</td>
-    </tr>
-<tr data-ice="file">
-      <td data-ice="filePath"><span><a href="file/src/js/renderer.js.html#errorLines=1,13,2,22,3,6,8">src/js/renderer.js</a></span></td>
-      <td data-ice="identifier" class="identifiers">-</td>
-      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/7</span></td>
-      <td style="display: none;" data-ice="size">1011 byte</td>
-      <td style="display: none;" data-ice="lines">34</td>
-      <td style="display: none;" data-ice="updated">2020-02-06 23:59:27 (UTC)</td>
-    </tr>
-</tbody>
-</table>
+// Initialize node-pty with an appropriate shell
+const shell = process.env[os.platform() === &apos;win32&apos; ? &apos;COMSPEC&apos; : &apos;SHELL&apos;];
+
+let env = {
+  HOME: process.cwd() + &quot;/Home&quot;
+}
+
+console.log(process.env, env)
+const ptyProcess = pty.spawn(shell, [], {
+  name: &apos;xterm-color&apos;,
+  cols: 80,
+  rows: 30,
+  cwd: process.cwd() + &quot;/Home&quot;,
+  env: env
+});
+
+// Initialize xterm.js and attach it to the DOM
+const xterm = new Terminal({
+                          cursorStyle:&apos;bar&apos;,
+                          cols: 80,
+                          rows: 30,
+											    fontSize:13,fontFamily:&quot;&apos;IBM Plex Mono&apos;, monospace&quot;,
+													allowTransparency:true,
+													theme:{background: &apos;rgba(255, 255, 255, 0.0)&apos;}
+												  });
+xterm.open(document.getElementById(&apos;xterm&apos;));
+
+// Setup communication between xterm.js and node-pty
+xterm.onData(data =&gt; ptyProcess.write(data));
+ptyProcess.on(&apos;data&apos;, data =&gt; xterm.write(data));
+</code></pre>
+
 </div>
 
 <footer class="footer">

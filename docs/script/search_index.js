@@ -286,5 +286,11 @@ window.esdocSearchIndex = [
     "file/src/js/main.js.html",
     "src/js/main.js",
     "file"
+  ],
+  [
+    "src/js/renderer.js",
+    "file/src/js/renderer.js.html",
+    "src/js/renderer.js",
+    "file"
   ]
 ]

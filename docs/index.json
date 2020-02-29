@@ -567,7 +567,7 @@
     "__docId__": 48,
     "kind": "file",
     "name": "src/js/main.js",
-    "content": "const { app, BrowserWindow } = require('electron')\n\nfunction createWindow () {\n  // Create the browser window.\n  const win = new BrowserWindow({\n    width: 800,\n    height: 600,\n    webPreferences: {\n      nodeIntegration: true\n    }\n  })\n\n  // and load the index.html of the app.\n  win.loadFile('src/html/index.html')\n\n  // Open the DevTools.\n  win.webContents.openDevTools()\n}\n\n// This method will be called when Electron has finished\n// initialization and is ready to create browser windows.\n// Some APIs can only be used after this event occurs.\napp.whenReady().then(createWindow)\n\n// Quit when all windows are closed.\napp.on('window-all-closed', () => {\n  // On macOS it is common for applications and their menu bar\n  // to stay active until the user quits explicitly with Cmd + Q\n  if (process.platform !== 'darwin') {\n    app.quit()\n  }\n})\n\napp.on('activate', () => {\n  // On macOS it's common to re-create a window in the app when the\n  // dock icon is clicked and there are no other windows open.\n  if (BrowserWindow.getAllWindows().length === 0) {\n    createWindow()\n  }\n})\n\n// In this file you can include the rest of your app's specific main process\n// code. You can also put them in separate files and require them here.\n",
+    "content": "const { app, BrowserWindow } = require('electron')\n\n// Create Home Folder\nlet fs = require('fs-extra');\nlet dir = './Home'\ntry {\n  fs.mkdirSync(dir)\n}\ncatch (err){\n  console.error(err)\n  if (err.code == \"EEXIST\"){\n    console.log(\"\\n\\n --- Removing File...\")\n    fs.remove(dir).then(() => {\n      console.log(\"\\n\\n --- Trying again...\")\n      fs.mkdirSync(dir)\n    }).catch(err => {\n      console.error(err)\n    })\n  }\n}\n\n\nfunction createWindow () {\n  // Create the browser window.\n  const win = new BrowserWindow({\n    width: 800,\n    height: 600,\n    webPreferences: {\n      nodeIntegration: true\n    }\n  })\n\n  // and load the index.html of the app.\n  win.loadFile('src/html/index.html')\n\n  // Open the DevTools.\n  win.webContents.openDevTools()\n}\n\n// This method will be called when Electron has finished\n// initialization and is ready to create browser windows.\n// Some APIs can only be used after this event occurs.\napp.whenReady().then(createWindow)\n\n// Quit when all windows are closed.\napp.on('window-all-closed', () => {\n  // On macOS it is common for applications and their menu bar\n  // to stay active until the user quits explicitly with Cmd + Q\n  if (process.platform !== 'darwin') {\n    app.quit()\n  }\n})\n\napp.on('activate', () => {\n  // On macOS it's common to re-create a window in the app when the\n  // dock icon is clicked and there are no other windows open.\n  if (BrowserWindow.getAllWindows().length === 0) {\n    createWindow()\n  }\n})\n\n// In this file you can include the rest of your app's specific main process\n// code. You can also put them in separate files and require them here.\n",
     "static": true,
     "longname": "/Users/joelpeckham/Documents/Sitka/src/js/main.js",
     "access": "public",
@@ -597,6 +597,48 @@
   },
   {
     "__docId__": 50,
+    "kind": "variable",
+    "name": "fs",
+    "memberof": "src/js/main.js",
+    "static": true,
+    "longname": "src/js/main.js~fs",
+    "access": "public",
+    "export": false,
+    "importPath": "sitka",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 4,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 51,
+    "kind": "variable",
+    "name": "dir",
+    "memberof": "src/js/main.js",
+    "static": true,
+    "longname": "src/js/main.js~dir",
+    "access": "public",
+    "export": false,
+    "importPath": "sitka",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 5,
+    "undocument": true,
+    "type": {
+      "types": [
+        "string"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 52,
     "kind": "function",
     "name": "createWindow",
     "memberof": "src/js/main.js",
@@ -609,10 +651,168 @@
     "importPath": "sitka",
     "importStyle": null,
     "description": null,
-    "lineNumber": 3,
+    "lineNumber": 23,
     "undocument": true,
     "params": [],
     "return": null,
+    "ignore": true
+  },
+  {
+    "__docId__": 53,
+    "kind": "file",
+    "name": "src/js/renderer.js",
+    "content": "var os = require('os');\nvar pty = require('node-pty');\nvar Terminal = require('xterm').Terminal;\n\n// Initialize node-pty with an appropriate shell\nconst shell = process.env[os.platform() === 'win32' ? 'COMSPEC' : 'SHELL'];\n\nlet env = {\n  HOME: process.cwd() + \"/Home\"\n}\n\nconsole.log(process.env, env)\nconst ptyProcess = pty.spawn(shell, [], {\n  name: 'xterm-color',\n  cols: 80,\n  rows: 30,\n  cwd: process.cwd() + \"/Home\",\n  env: env\n});\n\n// Initialize xterm.js and attach it to the DOM\nconst xterm = new Terminal({\n                          cursorStyle:'bar',\n                          cols: 80,\n                          rows: 30,\n\t\t\t\t\t\t\t\t\t\t\t    fontSize:13,fontFamily:\"'IBM Plex Mono', monospace\",\n\t\t\t\t\t\t\t\t\t\t\t\t\tallowTransparency:true,\n\t\t\t\t\t\t\t\t\t\t\t\t\ttheme:{background: 'rgba(255, 255, 255, 0.0)'}\n\t\t\t\t\t\t\t\t\t\t\t\t  });\nxterm.open(document.getElementById('xterm'));\n\n// Setup communication between xterm.js and node-pty\nxterm.onData(data => ptyProcess.write(data));\nptyProcess.on('data', data => xterm.write(data));\n",
+    "static": true,
+    "longname": "/Users/joelpeckham/Documents/Sitka/src/js/renderer.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 54,
+    "kind": "variable",
+    "name": "os",
+    "memberof": "src/js/renderer.js",
+    "static": true,
+    "longname": "src/js/renderer.js~os",
+    "access": "public",
+    "export": false,
+    "importPath": "sitka/src/js/renderer.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 1,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 55,
+    "kind": "variable",
+    "name": "pty",
+    "memberof": "src/js/renderer.js",
+    "static": true,
+    "longname": "src/js/renderer.js~pty",
+    "access": "public",
+    "export": false,
+    "importPath": "sitka/src/js/renderer.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 2,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 56,
+    "kind": "variable",
+    "name": "Terminal",
+    "memberof": "src/js/renderer.js",
+    "static": true,
+    "longname": "src/js/renderer.js~Terminal",
+    "access": "public",
+    "export": false,
+    "importPath": "sitka/src/js/renderer.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 3,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 57,
+    "kind": "variable",
+    "name": "shell",
+    "memberof": "src/js/renderer.js",
+    "static": true,
+    "longname": "src/js/renderer.js~shell",
+    "access": "public",
+    "export": false,
+    "importPath": "sitka/src/js/renderer.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 6,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 58,
+    "kind": "variable",
+    "name": "env",
+    "memberof": "src/js/renderer.js",
+    "static": true,
+    "longname": "src/js/renderer.js~env",
+    "access": "public",
+    "export": false,
+    "importPath": "sitka/src/js/renderer.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 8,
+    "undocument": true,
+    "type": {
+      "types": [
+        "{\"HOME\": *}"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 59,
+    "kind": "variable",
+    "name": "ptyProcess",
+    "memberof": "src/js/renderer.js",
+    "static": true,
+    "longname": "src/js/renderer.js~ptyProcess",
+    "access": "public",
+    "export": false,
+    "importPath": "sitka/src/js/renderer.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 13,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 60,
+    "kind": "variable",
+    "name": "xterm",
+    "memberof": "src/js/renderer.js",
+    "static": true,
+    "longname": "src/js/renderer.js~xterm",
+    "access": "public",
+    "export": false,
+    "importPath": "sitka/src/js/renderer.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 22,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
     "ignore": true
   },
   {
@@ -625,7 +825,7 @@
   },
   {
     "kind": "packageJSON",
-    "content": "{\n  \"name\": \"sitka\",\n  \"version\": \"1.0.0\",\n  \"description\": \"A learning tool for command line.\",\n  \"main\": \"src/js/main.js\",\n  \"scripts\": {\n    \"start\": \"electron .\",\n    \"docs\": \"./node_modules/.bin/esdoc\"\n  },\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git@github.com:joelpeckham/Sitka.git\"\n  },\n  \"author\": \"Joel Peckham\",\n  \"license\": \"MIT\",\n  \"bugs\": {\n    \"url\": \"https://github.com/joelpeckham/Sitka/issues\"\n  },\n  \"homepage\": \"https://github.com/joelpeckham/Sitka#readme\",\n  \"devDependencies\": {\n    \"electron\": \"^8.0.2\",\n    \"esdoc\": \"^1.1.0\",\n    \"esdoc-standard-plugin\": \"^1.0.0\"\n  },\n  \"dependencies\": {\n    \"esdoc-integrate-manual-plugin\": \"^1.0.0\"\n  }\n}\n",
+    "content": "{\n  \"type\": \"module\",\n  \"name\": \"sitka\",\n  \"version\": \"1.0.0\",\n  \"description\": \"A learning tool for command line.\",\n  \"main\": \"src/js/main.js\",\n  \"scripts\": {\n    \"start\": \"electron .\",\n    \"docs\": \"./node_modules/.bin/esdoc\",\n    \"update\": \"./node_modules/.bin/electron-rebuild\"\n  },\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git@github.com:joelpeckham/Sitka.git\"\n  },\n  \"author\": \"Joel Peckham\",\n  \"license\": \"MIT\",\n  \"bugs\": {\n    \"url\": \"https://github.com/joelpeckham/Sitka/issues\"\n  },\n  \"homepage\": \"https://github.com/joelpeckham/Sitka#readme\",\n  \"devDependencies\": {\n    \"electron\": \"^8.0.2\",\n    \"electron-rebuild\": \"^1.10.0\",\n    \"esdoc\": \"^1.1.0\",\n    \"esdoc-standard-plugin\": \"^1.0.0\"\n  },\n  \"dependencies\": {\n    \"fs-extra\": \"^8.1.0\",\n    \"node-pty\": \"^0.9.0\",\n    \"xterm\": \"^4.4.0\"\n  }\n}\n",
     "longname": "/Users/joelpeckham/Documents/Sitka/package.json",
     "name": "package.json",
     "static": true,

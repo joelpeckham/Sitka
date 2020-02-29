@@ -36,6 +36,26 @@
 <div class="content" data-ice="content"><h1 data-ice="title">src/js/main.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">const { app, BrowserWindow } = require(&apos;electron&apos;)
 
+// Create Home Folder
+let fs = require(&apos;fs-extra&apos;);
+let dir = &apos;./Home&apos;
+try {
+  fs.mkdirSync(dir)
+}
+catch (err){
+  console.error(err)
+  if (err.code == &quot;EEXIST&quot;){
+    console.log(&quot;\n\n --- Removing File...&quot;)
+    fs.remove(dir).then(() =&gt; {
+      console.log(&quot;\n\n --- Trying again...&quot;)
+      fs.mkdirSync(dir)
+    }).catch(err =&gt; {
+      console.error(err)
+    })
+  }
+}
+
+
 function createWindow () {
   // Create the browser window.
   const win = new BrowserWindow({
