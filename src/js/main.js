@@ -17,7 +17,6 @@ console.log(BrowserWindow)
 /**
  * Filesystem object. Used to make fake home directory for node-PTY to use.
  * Methods at https://www.npmjs.com/package/fs-extra
- * @return {None} Function returns nothing.
  */
 let fs = require('fs-extra');
 /**
@@ -44,6 +43,7 @@ catch (err){
  * Electron createWindow function called when app.whenReady() resolves.
  * This method will be called when Electron has finished initialization and is ready to create browser windows.
  * Some APIs can only be used after this event occurs.
+ * @return {None} Function returns nothing.
  */
 function createWindow () {
   const win = new BrowserWindow({
