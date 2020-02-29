@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "name": "sitka",
   "version": "1.0.0",
   "description": "A learning tool for command line.",
@@ -25,6 +26,7 @@
     "esdoc-standard-plugin": "^1.0.0"
   },
   "dependencies": {
+    "fs-extra": "^8.1.0",
     "node-pty": "^0.9.0",
     "xterm": "^4.4.0"
   }

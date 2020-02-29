@@ -102,3 +102,6 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Home folder for making sandbox environment
+Home

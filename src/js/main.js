@@ -1,5 +1,25 @@
 const { app, BrowserWindow } = require('electron')
 
+// Create Home Folder
+let fs = require('fs-extra');
+let dir = './Home'
+try {
+  fs.mkdirSync(dir)
+}
+catch (err){
+  console.error(err)
+  if (err.code == "EEXIST"){
+    console.log("\n\n --- Removing File...")
+    fs.remove(dir).then(() => {
+      console.log("\n\n --- Trying again...")
+      fs.mkdirSync(dir)
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+}
+
+
 function createWindow () {
   // Create the browser window.
   const win = new BrowserWindow({
