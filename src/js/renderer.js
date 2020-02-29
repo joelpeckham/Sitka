@@ -2,19 +2,19 @@
  * os is an Electron object for operating system interaction.
  * @type {Object}
  */
-var os = require('os');
+let os = require('os');
 
 /**
  * pty is an object used to spawn and interact with a shell on the user's system.
  * @type {Object}
  */
-var pty = require('node-pty');
+let pty = require('node-pty');
 
 /**
  * Terminal is a class used to create xTerm terminal objects.
  * @type {Function}
  */
-var Terminal = require('xterm').Terminal;
+let Terminal = require('xterm').Terminal;
 
 /**
  * shell holds the path to the shell to be spawned by node-pty.
@@ -30,8 +30,6 @@ let env = {
   HOME: process.cwd() + "/Home"
 }
 
-console.log(process.env, env)
-
 /**
  * ptyProcess is the node-pty shell object.
  * This object is used to interact with the pty shell.
@@ -42,8 +40,10 @@ const ptyProcess = pty.spawn(shell, [], {
   cols: 80,
   rows: 30,
   cwd: process.cwd() + "/Home",
-  env: env
+  env: env,
+  handleFlowControl: false
 });
+
 
 // Initialize xterm.js and attach it to the DOM
 
@@ -62,6 +62,5 @@ const xterm = new Terminal({
 												  });
 xterm.open(document.getElementById('xterm'));
 
-// Setup communication between xterm.js and node-pty
-xterm.onData(data => ptyProcess.write(data));
-ptyProcess.on('data', data => xterm.write(data));
+let ShellTerminalLinkingManager = require("./TerminalManager.js");
+const dataFlow = new ShellTerminalLinkingManager(ptyProcess, xterm)

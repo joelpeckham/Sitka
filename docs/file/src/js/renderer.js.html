@@ -29,12 +29,15 @@
 <nav class="navigation" data-ice="nav"><div>
   <ul>
     
-  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#js">js</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-createWindow">createWindow</a></span></span></li>
+  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#js">js</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/js/TerminalManager.js~exports.html">exports</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-createWindow">createWindow</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-BrowserWindow">BrowserWindow</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-app">app</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-dir">dir</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-fs">fs</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ShellTerminalLinkingManager">ShellTerminalLinkingManager</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Terminal">Terminal</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-dataFlow">dataFlow</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-env">env</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-os">os</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-pty">pty</a></span></span></li>
@@ -50,19 +53,19 @@
  * os is an Electron object for operating system interaction.
  * @type {Object}
  */
-var os = require(&apos;os&apos;);
+let os = require(&apos;os&apos;);
 
 /**
  * pty is an object used to spawn and interact with a shell on the user&apos;s system.
  * @type {Object}
  */
-var pty = require(&apos;node-pty&apos;);
+let pty = require(&apos;node-pty&apos;);
 
 /**
  * Terminal is a class used to create xTerm terminal objects.
  * @type {Function}
  */
-var Terminal = require(&apos;xterm&apos;).Terminal;
+let Terminal = require(&apos;xterm&apos;).Terminal;
 
 /**
  * shell holds the path to the shell to be spawned by node-pty.
@@ -78,8 +81,6 @@ let env = {
   HOME: process.cwd() + &quot;/Home&quot;
 }
 
-console.log(process.env, env)
-
 /**
  * ptyProcess is the node-pty shell object.
  * This object is used to interact with the pty shell.
@@ -90,8 +91,10 @@ const ptyProcess = pty.spawn(shell, [], {
   cols: 80,
   rows: 30,
   cwd: process.cwd() + &quot;/Home&quot;,
-  env: env
+  env: env,
+  handleFlowControl: false
 });
+
 
 // Initialize xterm.js and attach it to the DOM
 
@@ -110,9 +113,8 @@ const xterm = new Terminal({
 												  });
 xterm.open(document.getElementById(&apos;xterm&apos;));
 
-// Setup communication between xterm.js and node-pty
-xterm.onData(data =&gt; ptyProcess.write(data));
-ptyProcess.on(&apos;data&apos;, data =&gt; xterm.write(data));
+let ShellTerminalLinkingManager = require(&quot;./TerminalManager.js&quot;);
+const dataFlow = new ShellTerminalLinkingManager(ptyProcess, xterm)
 </code></pre>
 
 </div>

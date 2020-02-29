@@ -6,6 +6,12 @@ window.esdocSearchIndex = [
     "variable"
   ],
   [
+    "sitka/src/js/renderer.js~shellterminallinkingmanager",
+    "variable/index.html#static-variable-ShellTerminalLinkingManager",
+    "<span>ShellTerminalLinkingManager</span> <span class=\"search-result-import-path\">sitka/src/js/renderer.js</span>",
+    "variable"
+  ],
+  [
     "sitka/src/js/renderer.js~terminal",
     "variable/index.html#static-variable-Terminal",
     "<span>Terminal</span> <span class=\"search-result-import-path\">sitka/src/js/renderer.js</span>",
@@ -24,6 +30,12 @@ window.esdocSearchIndex = [
     "function"
   ],
   [
+    "sitka/src/js/renderer.js~dataflow",
+    "variable/index.html#static-variable-dataFlow",
+    "<span>dataFlow</span> <span class=\"search-result-import-path\">sitka/src/js/renderer.js</span>",
+    "variable"
+  ],
+  [
     "sitka~dir",
     "variable/index.html#static-variable-dir",
     "<span>dir</span> <span class=\"search-result-import-path\">sitka</span>",
@@ -34,6 +46,12 @@ window.esdocSearchIndex = [
     "variable/index.html#static-variable-env",
     "<span>env</span> <span class=\"search-result-import-path\">sitka/src/js/renderer.js</span>",
     "variable"
+  ],
+  [
+    "sitka/src/js/terminalmanager.js~exports",
+    "class/src/js/TerminalManager.js~exports.html",
+    "<span>exports</span> <span class=\"search-result-import-path\">sitka/src/js/TerminalManager.js</span>",
+    "class"
   ],
   [
     "sitka~fs",
@@ -352,6 +370,48 @@ window.esdocSearchIndex = [
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined",
     "src/.external-ecmascript.js~undefined",
     "external"
+  ],
+  [
+    "src/js/terminalmanager.js",
+    "file/src/js/TerminalManager.js.html",
+    "src/js/TerminalManager.js",
+    "file"
+  ],
+  [
+    "src/js/terminalmanager.js~exports#constructor",
+    "class/src/js/TerminalManager.js~exports.html#instance-constructor-constructor",
+    "src/js/TerminalManager.js~exports#constructor",
+    "method"
+  ],
+  [
+    "src/js/terminalmanager.js~exports#examineshelldata",
+    "class/src/js/TerminalManager.js~exports.html#instance-method-examineShellData",
+    "src/js/TerminalManager.js~exports#examineShellData",
+    "method"
+  ],
+  [
+    "src/js/terminalmanager.js~exports#onshelldata",
+    "class/src/js/TerminalManager.js~exports.html#instance-method-onShellData",
+    "src/js/TerminalManager.js~exports#onShellData",
+    "method"
+  ],
+  [
+    "src/js/terminalmanager.js~exports#ontermdata",
+    "class/src/js/TerminalManager.js~exports.html#instance-method-onTermData",
+    "src/js/TerminalManager.js~exports#onTermData",
+    "method"
+  ],
+  [
+    "src/js/terminalmanager.js~exports#shell",
+    "class/src/js/TerminalManager.js~exports.html#instance-member-shell",
+    "src/js/TerminalManager.js~exports#shell",
+    "member"
+  ],
+  [
+    "src/js/terminalmanager.js~exports#term",
+    "class/src/js/TerminalManager.js~exports.html#instance-member-term",
+    "src/js/TerminalManager.js~exports#term",
+    "member"
   ],
   [
     "src/js/main.js",
