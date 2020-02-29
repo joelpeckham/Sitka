@@ -1,5 +1,77 @@
 window.esdocSearchIndex = [
   [
+    "sitka~browserwindow",
+    "variable/index.html#static-variable-BrowserWindow",
+    "<span>BrowserWindow</span> <span class=\"search-result-import-path\">sitka</span>",
+    "variable"
+  ],
+  [
+    "sitka/src/js/renderer.js~terminal",
+    "variable/index.html#static-variable-Terminal",
+    "<span>Terminal</span> <span class=\"search-result-import-path\">sitka/src/js/renderer.js</span>",
+    "variable"
+  ],
+  [
+    "sitka~app",
+    "variable/index.html#static-variable-app",
+    "<span>app</span> <span class=\"search-result-import-path\">sitka</span>",
+    "variable"
+  ],
+  [
+    "sitka~createwindow",
+    "function/index.html#static-function-createWindow",
+    "<span>createWindow</span> <span class=\"search-result-import-path\">sitka</span>",
+    "function"
+  ],
+  [
+    "sitka~dir",
+    "variable/index.html#static-variable-dir",
+    "<span>dir</span> <span class=\"search-result-import-path\">sitka</span>",
+    "variable"
+  ],
+  [
+    "sitka/src/js/renderer.js~env",
+    "variable/index.html#static-variable-env",
+    "<span>env</span> <span class=\"search-result-import-path\">sitka/src/js/renderer.js</span>",
+    "variable"
+  ],
+  [
+    "sitka~fs",
+    "variable/index.html#static-variable-fs",
+    "<span>fs</span> <span class=\"search-result-import-path\">sitka</span>",
+    "variable"
+  ],
+  [
+    "sitka/src/js/renderer.js~os",
+    "variable/index.html#static-variable-os",
+    "<span>os</span> <span class=\"search-result-import-path\">sitka/src/js/renderer.js</span>",
+    "variable"
+  ],
+  [
+    "sitka/src/js/renderer.js~pty",
+    "variable/index.html#static-variable-pty",
+    "<span>pty</span> <span class=\"search-result-import-path\">sitka/src/js/renderer.js</span>",
+    "variable"
+  ],
+  [
+    "sitka/src/js/renderer.js~ptyprocess",
+    "variable/index.html#static-variable-ptyProcess",
+    "<span>ptyProcess</span> <span class=\"search-result-import-path\">sitka/src/js/renderer.js</span>",
+    "variable"
+  ],
+  [
+    "sitka/src/js/renderer.js~shell",
+    "variable/index.html#static-variable-shell",
+    "<span>shell</span> <span class=\"search-result-import-path\">sitka/src/js/renderer.js</span>",
+    "variable"
+  ],
+  [
+    "sitka/src/js/renderer.js~xterm",
+    "variable/index.html#static-variable-xterm",
+    "<span>xterm</span> <span class=\"search-result-import-path\">sitka/src/js/renderer.js</span>",
+    "variable"
+  ],
+  [
     "src/.external-ecmascript.js~array",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
     "src/.external-ecmascript.js~Array",

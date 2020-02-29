@@ -5,6 +5,12 @@
   {
     "name": "esdoc-standard-plugin",
     "option": {
+      "lint": {"enable": true},
+      "coverage": {"enable": true},
+      "accessor": {"access": ["public"]},
+      "undocumentIdentifier": {"enable": true},
+      "unexportedIdentifier": {"enable": true},
+      "typeInference": {"enable": true},
       "manual": {
         "files": [
           "./manual/Usage.md",

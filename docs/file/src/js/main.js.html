@@ -29,16 +29,49 @@
 <nav class="navigation" data-ice="nav"><div>
   <ul>
     
-  </ul>
+  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#js">js</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-createWindow">createWindow</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-BrowserWindow">BrowserWindow</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-app">app</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-dir">dir</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-fs">fs</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Terminal">Terminal</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-env">env</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-os">os</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-pty">pty</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ptyProcess">ptyProcess</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-shell">shell</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-xterm">xterm</a></span></span></li>
+</ul>
 </div>
 </nav>
 
 <div class="content" data-ice="content"><h1 data-ice="title">src/js/main.js</h1>
-<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">const { app, BrowserWindow } = require(&apos;electron&apos;)
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+ * app is the main Electron app object.
+ * @type {Object}
+ */
+const { app } = require(&apos;electron&apos;)
 
+/**
+ * BrowserWindow a class for creating windows in Electron.
+ * @type {Function}
+ */
+const { BrowserWindow } = require(&apos;electron&apos;)
+
+console.log(app)
+console.log(BrowserWindow)
 // Create Home Folder
+
+/**
+ * Filesystem object. Used to make fake home directory for node-PTY to use.
+ * Methods at https://www.npmjs.com/package/fs-extra
+ * @return {None} Function returns nothing.
+ */
 let fs = require(&apos;fs-extra&apos;);
-let dir = &apos;./Home&apos;
+/**
+ * String storing path of fake home directory.
+ */
+const dir = &apos;./Home&apos;
 try {
   fs.mkdirSync(dir)
 }
@@ -55,9 +88,12 @@ catch (err){
   }
 }
 
-
+/**
+ * Electron createWindow function called when app.whenReady() resolves.
+ * This method will be called when Electron has finished initialization and is ready to create browser windows.
+ * Some APIs can only be used after this event occurs.
+ */
 function createWindow () {
-  // Create the browser window.
   const win = new BrowserWindow({
     width: 800,
     height: 600,
@@ -70,7 +106,7 @@ function createWindow () {
   win.loadFile(&apos;src/html/index.html&apos;)
 
   // Open the DevTools.
-  win.webContents.openDevTools()
+  // win.webContents.openDevTools()
 }
 
 // This method will be called when Electron has finished

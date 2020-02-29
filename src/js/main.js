@@ -1,8 +1,29 @@
-const { app, BrowserWindow } = require('electron')
+/**
+ * app is the main Electron app object.
+ * @type {Object}
+ */
+const { app } = require('electron')
 
+/**
+ * BrowserWindow a class for creating windows in Electron.
+ * @type {Function}
+ */
+const { BrowserWindow } = require('electron')
+
+console.log(app)
+console.log(BrowserWindow)
 // Create Home Folder
+
+/**
+ * Filesystem object. Used to make fake home directory for node-PTY to use.
+ * Methods at https://www.npmjs.com/package/fs-extra
+ * @return {None} Function returns nothing.
+ */
 let fs = require('fs-extra');
-let dir = './Home'
+/**
+ * String storing path of fake home directory.
+ */
+const dir = './Home'
 try {
   fs.mkdirSync(dir)
 }
@@ -19,9 +40,12 @@ catch (err){
   }
 }
 
-
+/**
+ * Electron createWindow function called when app.whenReady() resolves.
+ * This method will be called when Electron has finished initialization and is ready to create browser windows.
+ * Some APIs can only be used after this event occurs.
+ */
 function createWindow () {
-  // Create the browser window.
   const win = new BrowserWindow({
     width: 800,
     height: 600,
@@ -34,7 +58,7 @@ function createWindow () {
   win.loadFile('src/html/index.html')
 
   // Open the DevTools.
-  win.webContents.openDevTools()
+  // win.webContents.openDevTools()
 }
 
 // This method will be called when Electron has finished

@@ -29,23 +29,62 @@
 <nav class="navigation" data-ice="nav"><div>
   <ul>
     
-  </ul>
+  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#js">js</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-createWindow">createWindow</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-BrowserWindow">BrowserWindow</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-app">app</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-dir">dir</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-fs">fs</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Terminal">Terminal</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-env">env</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-os">os</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-pty">pty</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ptyProcess">ptyProcess</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-shell">shell</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-xterm">xterm</a></span></span></li>
+</ul>
 </div>
 </nav>
 
 <div class="content" data-ice="content"><h1 data-ice="title">src/js/renderer.js</h1>
-<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">var os = require(&apos;os&apos;);
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+ * os is an Electron object for operating system interaction.
+ * @type {Object}
+ */
+var os = require(&apos;os&apos;);
+
+/**
+ * pty is an object used to spawn and interact with a shell on the user&apos;s system.
+ * @type {Object}
+ */
 var pty = require(&apos;node-pty&apos;);
+
+/**
+ * Terminal is a class used to create xTerm terminal objects.
+ * @type {Function}
+ */
 var Terminal = require(&apos;xterm&apos;).Terminal;
 
-// Initialize node-pty with an appropriate shell
+/**
+ * shell holds the path to the shell to be spawned by node-pty.
+ * @type {String}
+ */
 const shell = process.env[os.platform() === &apos;win32&apos; ? &apos;COMSPEC&apos; : &apos;SHELL&apos;];
 
+/**
+ * env holds the environment variables for node-pty
+ * @type {Object}
+ */
 let env = {
   HOME: process.cwd() + &quot;/Home&quot;
 }
 
 console.log(process.env, env)
+
+/**
+ * ptyProcess is the node-pty shell object.
+ * This object is used to interact with the pty shell.
+ * @type {Object}
+ */
 const ptyProcess = pty.spawn(shell, [], {
   name: &apos;xterm-color&apos;,
   cols: 80,
@@ -55,6 +94,12 @@ const ptyProcess = pty.spawn(shell, [], {
 });
 
 // Initialize xterm.js and attach it to the DOM
+
+/**
+ * xterm is the xTerm object.
+ * This is used to create the xTerm UI element.
+ * @type {Object}
+ */
 const xterm = new Terminal({
                           cursorStyle:&apos;bar&apos;,
                           cols: 80,
