@@ -10,8 +10,6 @@ const { app } = require('electron')
  */
 const { BrowserWindow } = require('electron')
 
-console.log(app)
-console.log(BrowserWindow)
 // Create Home Folder
 
 /**

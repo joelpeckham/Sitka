@@ -14,7 +14,6 @@ module.exports = class CommandLine {
 
   async python(){
     this.prompt("\n"+"-".repeat(this.term.cols))
-    console.log("I'm here!")
     let env = { HOME: process.cwd() + "/Home"}
     let shellname = process.env[this.os.platform() === 'win32' ? 'COMSPEC' : 'SHELL'];
     let shell = this.pty.spawn(shellname, [], {
@@ -48,5 +47,31 @@ module.exports = class CommandLine {
     });
     this.prompt("\n"+"-".repeat(this.term.cols))
     return answer
+  }
+
+  async bash(){
+    this.prompt("\n"+"-".repeat(this.term.cols))
+    let env = { HOME: process.cwd() + "/Home"}
+    let shell = this.pty.spawn('bash', [], {
+      cols: 80, rows: 30,
+      cwd: process.cwd() + "/Home",
+      env: env,
+      handleFlowControl: true
+    });
+    this.term.onData(data => {shell.write(data)});
+    let done = await new Promise ((resolve, reject) => {
+      shell.on('data', data => {
+        console.log(data)
+        if (data.trim() != 'exit') {
+          this.term.write(data);
+        }
+        else{
+          this.term.onData(data => {});
+          resolve();
+        }
+      });
+    });
+    this.prompt("\n"+"-".repeat(this.term.cols))
+    return
   }
 }
