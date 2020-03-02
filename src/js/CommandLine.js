@@ -1,10 +1,11 @@
+let Terminal = require('xterm').Terminal;
+let os = require('os');
+let pty = require('node-pty');
+let ParsePython = require('./ParsePython.js');
+
 module.exports = class CommandLine {
   constructor(domElement, xTermOptionObject) {
-    let Terminal = require('xterm').Terminal;
-    this.lfc = 0
-    this.os = require('os');
-    this.pty = require('node-pty');
-    this.term =  new Terminal(xTermOptionObject);
+    this.term = new Terminal(xTermOptionObject);
     this.term.open(domElement);
   }
 
@@ -13,65 +14,31 @@ module.exports = class CommandLine {
   }
 
   async python(){
-    this.prompt("\n"+"-".repeat(this.term.cols))
-    let env = { HOME: process.cwd() + "/Home"}
-    let shellname = process.env[this.os.platform() === 'win32' ? 'COMSPEC' : 'SHELL'];
-    let shell = this.pty.spawn(shellname, [], {
-      cols: 80, rows: 30,
-      cwd: process.cwd() + "/Home",
-      env: env,
-      handleFlowControl: true
-    });
-    this.term.onData(data => {shell.write(data); lastData = data});
-    shell.write('python3\n')
 
-    let ansLog = null
-    var lastData = null
-    let seenPrompt = 0;
+    this.prompt("\n"+"-".repeat(this.term.cols)+'\n')
+
+    let parser = new ParsePython()
+
+    let shell = pty.spawn('bash', [], {
+      cols: this.term.cols, rows: this.term.rows,
+      cwd: process.cwd() + "/Home",
+      env: { HOME: process.cwd() + "/Home"}
+    });
+
+    this.term.onData(data => {shell.write(data)});
+
+    shell.write('python3\n')
 
     let answer = await new Promise ((resolve, reject) => {
       shell.on('data', data => {
-        if (data.endsWith(">>> ") && data != lastData) {
-          seenPrompt++
-        }
-        if (seenPrompt == 1) {
-          this.term.write(data);
-          if (data.endsWith("\n") && !data.startsWith('...')){
-            ansLog = data
-          }
-        }
-        if (seenPrompt > 1) {
-          resolve(ansLog);
-        }
+        let {resolved, answer, display} = parser.parse(data);
+        if (resolved) {resolve(answer)};
+        if (display) {this.term.write(data)};
       });
     });
+
+    this.term.onData(data => {});
     this.prompt("\n"+"-".repeat(this.term.cols))
     return answer
-  }
-
-  async bash(){
-    this.prompt("\n"+"-".repeat(this.term.cols))
-    let env = { HOME: process.cwd() + "/Home"}
-    let shell = this.pty.spawn('bash', [], {
-      cols: 80, rows: 30,
-      cwd: process.cwd() + "/Home",
-      env: env,
-      handleFlowControl: true
-    });
-    this.term.onData(data => {shell.write(data)});
-    let done = await new Promise ((resolve, reject) => {
-      shell.on('data', data => {
-        console.log(data)
-        if (data.trim() != 'exit') {
-          this.term.write(data);
-        }
-        else{
-          this.term.onData(data => {});
-          resolve();
-        }
-      });
-    });
-    this.prompt("\n"+"-".repeat(this.term.cols))
-    return
   }
 }
