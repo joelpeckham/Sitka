@@ -13,11 +13,15 @@ async function renderLogic() {
   cmd.prompt("Hello, Joel. I'm Sika.")
   cmd.prompt("Here's a python prompt.")
   cmd.prompt("Type an expression that returns a list of ints 1-10 inclusive.")   //list(range(1,11))
+  // answer = await cmd.pythonExpression()
+  // cmd.prompt(`The answer returned was ${answer}`)
+  // answer2 = await cmd.pythonExpression()
+  // cmd.prompt(`The answer returned was ${answer2}`)
 
   while (true){
-    answer = await cmd.python()
+    answer = await cmd.pythonExpression()
     console.log(answer)
-    if( answer.trim() == "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"){
+    if( answer.trim() == "1"){
       cmd.prompt("\nWow! That's correct!")
       break
     }

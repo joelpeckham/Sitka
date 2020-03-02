@@ -1,27 +1,34 @@
 module.exports = class ParsePython {
   constructor(){
-    this.answer = null
-    this.lastData = null
-    this.seenPrompt = 0;
+    this.userStartSentinel = 'setupDone | aEVJgX5Mfr01czdSI7Ln';
+
+    this.answer = null;
+    this.displaying = false;
+    this.resolved = false;
+    this.lastData = null;
+
+    this.seenStartSentinel = false;
+    this.pythonPromptCount = 0;
   }
 
   parse(data){
 
-    let display = false;
-    let resolved = false;
-
-    if (data.endsWith(">>> ") && data != this.lastData) {
-      this.seenPrompt++
-    }
-    if (this.seenPrompt == 1) {
-      display = true;
-      if (data.endsWith("\n") && !data.startsWith('...')){
-        this.answer = data
+    if (this.seenStartSentinel){
+      this.displaying = true;
+      if (data == '>>> '){
+        this.pythonPromptCount++;
+        if (this.pythonPromptCount > 1){
+          this.displaying = false;
+          this.answer = this.lastData;
+          this.resolved = true;
+        }
       }
     }
-    if (this.seenPrompt > 1) {
-      resolved = true
+    else{
+      if (data.trim() == this.userStartSentinel) { this.seenStartSentinel = true };
     }
-    return {resolved:resolved, answer: this.answer, display: display};
+
+    this.lastData = data;
+    return {resolved: this.resolved, answer: this.answer, display: this.displaying};
   }
 }
