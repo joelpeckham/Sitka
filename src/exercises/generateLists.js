@@ -26,7 +26,7 @@ module.exports = function generateLists(config = null) {
       return {
         result: (response.teardown.y == randomListx2),
         correctMessage: "You got it right",
-        wrongMessage: "You're WRONG!"
+        wrongMessage: "Hmm. Try again."
       }
     }
   }

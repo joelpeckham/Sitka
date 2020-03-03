@@ -14,20 +14,22 @@ async function renderLogic() {
 
 
   cmd.promptTerminal(`Hello, Joel. ${cmd.color.red}I'm Sika.${cmd.color.reset}`)
-  cmd.promptTerminal("Here's a python prompt.")
+  cmd.promptTerminal("Here's a python prompt.\n")
 
-  let {question, pre, post, check} = generateLists()
+  let incorrect = true;
+  while (incorrect){
 
-  while (true){
+    let {question, pre, post, check} = generateLists()
     cmd.promptTerminal(question)
     answer = await cmd.pythonExpression([pre], [post])
     let {result, correctMessage, wrongMessage} = check(answer)
-    if (result) {cmd.promptTerminal(correctMessage); break}
+    if (result) {cmd.promptTerminal(correctMessage); incorrect = false;}
     else{cmd.promptTerminal(wrongMessage)}
+    cmd.promptTerminal('')
   }
 
   console.dir(answer)
-  cmd.promptTerminal("Ok. We're done for the day.")
+  cmd.promptTerminal("Ok. Lesson's Over.")
 }
 
 // call the main function
