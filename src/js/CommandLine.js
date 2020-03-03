@@ -1,7 +1,6 @@
 let Terminal = require('xterm').Terminal;
 let os = require('os');
 let pty = require('node-pty');
-let ParsePython = require('./ParsePython.js');
 let ShellData = require('./ShellData.js');
 let TermData = require('./TermData.js');
 
@@ -70,17 +69,9 @@ module.exports = class CommandLine {
 
     this.promptTerminal("\n"+"-".repeat(this.term.cols)+'\n')
 
-    // this.shellData.on(data => {this.term.write(data)});
-    // this.termData.on(data => this.shell.write(data));
-    //let parser = new ParsePython()
-
     //Setup Logic
     await this.writeInShell('python3\n','>>> ');
     await this.writeInShell("from time import sleep\n",'>>> ');
-
-    // for (const expression of setupExpressions) {
-    //   this.shell.write(expression + '\n')
-    // }
 
     let userStartSentinel = 'setupDone | aEVJgX5Mfr01czdSI7Ln'
     await this.writeInShell(`print('${userStartSentinel}')\n`, userStartSentinel, 0.1, true)
