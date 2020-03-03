@@ -10,7 +10,7 @@ async function renderLogic() {
   });
 
 
-  cmd.promptTerminal("Hello, Joel. I'm Sika.")
+  cmd.promptTerminal(`Hello, Joel. ${cmd.color.red}I'm Sika.${cmd.color.reset}`)
   cmd.promptTerminal("Here's a python prompt.")
   cmd.promptTerminal("Type an expression that returns a list of ints 1-10 inclusive.")   //list(range(1,11))
   answer = await cmd.pythonExpression(['x = 10','from time import sleep', "y = 'hello' "], ['x','y'])
