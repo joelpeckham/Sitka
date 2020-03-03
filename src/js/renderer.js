@@ -9,11 +9,23 @@ async function renderLogic() {
   	theme:{background: 'rgba(255, 255, 255, 0.0)'}
   });
 
+  let generateLists = require("./../exercises/generateLists.js")
+
+
 
   cmd.promptTerminal(`Hello, Joel. ${cmd.color.red}I'm Sika.${cmd.color.reset}`)
   cmd.promptTerminal("Here's a python prompt.")
-  cmd.promptTerminal("Type an expression that returns a list of ints 1-10 inclusive.")   //list(range(1,11))
-  answer = await cmd.pythonExpression(['x = 10','from time import sleep', "y = 'hello' "], ['x','y'])
+
+  let {question, pre, post, check} = generateLists()
+
+  while (true){
+    cmd.promptTerminal(question)
+    answer = await cmd.pythonExpression([pre], [post])
+    let {result, correctMessage, wrongMessage} = check(answer)
+    if (result) {cmd.promptTerminal(correctMessage); break}
+    else{cmd.promptTerminal(wrongMessage)}
+  }
+
   console.dir(answer)
   cmd.promptTerminal("Ok. We're done for the day.")
 }

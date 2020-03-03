@@ -34,7 +34,7 @@ module.exports = class CommandLine {
     this.term.writeln(prompt)
   }
 
-  async writeInShell(str, expected, timeout = 0.1, trim = false){
+  async writeInShell(str, expected, timeout = 0.5, trim = false){
     let lastCallback = this.shellData.callbackFunction;
     this.shell.write(str)
     let promised = await new Promise ((resolve, reject) => {
@@ -83,8 +83,6 @@ module.exports = class CommandLine {
 
   async pythonExpression(setupExpressions = [], teardownExpressions = []){
 
-    this.promptTerminal("\n"+"-".repeat(this.term.cols)+'\n')
-
     //Setup Logic
     await this.writeInShell('python3\n','>>> ');
 
@@ -93,7 +91,7 @@ module.exports = class CommandLine {
     }
 
     let userStartSentinel = 'setupDone | aEVJgX5Mfr01czdSI7Ln'
-    await this.writeInShell(`print('${userStartSentinel}')\n`, userStartSentinel, 0.1, true)
+    await this.writeInShell(`print('${userStartSentinel}')\n`, userStartSentinel, 0.5, true)
 
     this.shellData.on(data => {this.term.write(data)});
     this.termData.on(data => this.shell.write(data));
@@ -104,9 +102,10 @@ module.exports = class CommandLine {
     this.termData.on(data => {});
     this.shellData.on(data => {});
 
-    let teardownOutput = []
+    let teardownOutput = {}
     for (let exp of teardownExpressions){
-      teardownOutput.push({expression: exp, output: await this.getExpressionOutput(exp)})
+      teardownOutput[exp] = await this.getExpressionOutput(exp)
+      teardownOutput[exp] = teardownOutput[exp].trim()
     }
 
     this.shell.write('exit()\n');
