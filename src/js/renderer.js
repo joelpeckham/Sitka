@@ -4,16 +4,14 @@ async function renderLogic() {
     cursorStyle:'bar',
     cols: 80,
     rows: 45,
-    fontSize:13,fontFamily:"'IBM Plex Mono', monospace",
   	allowTransparency:true,
   	theme:{background: 'rgba(255, 255, 255, 0.0)'}
   });
 
-  let generateLists = require("./../exercises/generateLists.js")
+  let exercises = require("./../exercises/");
+  let generateLists = exercises.generateLists;
 
-
-
-  cmd.promptTerminal(`Hello, Joel. ${cmd.color.red}I'm Sika.${cmd.color.reset}`)
+  cmd.promptTerminal(`Hello, Joel. I'm ${cmd.color.red}Sika.${cmd.color.reset}`)
   cmd.promptTerminal("Here's a python prompt.\n")
 
   let incorrect = true;

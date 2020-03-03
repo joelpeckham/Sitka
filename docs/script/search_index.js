@@ -6,6 +6,24 @@ window.esdocSearchIndex = [
     "variable"
   ],
   [
+    "sitka/src/js/commandline.js~shelldata",
+    "variable/index.html#static-variable-ShellData",
+    "<span>ShellData</span> <span class=\"search-result-import-path\">sitka/src/js/CommandLine.js</span>",
+    "variable"
+  ],
+  [
+    "sitka/src/js/commandline.js~termdata",
+    "variable/index.html#static-variable-TermData",
+    "<span>TermData</span> <span class=\"search-result-import-path\">sitka/src/js/CommandLine.js</span>",
+    "variable"
+  ],
+  [
+    "sitka/src/js/commandline.js~terminal",
+    "variable/index.html#static-variable-Terminal",
+    "<span>Terminal</span> <span class=\"search-result-import-path\">sitka/src/js/CommandLine.js</span>",
+    "variable"
+  ],
+  [
     "sitka~app",
     "variable/index.html#static-variable-app",
     "<span>app</span> <span class=\"search-result-import-path\">sitka</span>",
@@ -24,9 +42,27 @@ window.esdocSearchIndex = [
     "variable"
   ],
   [
+    "sitka/src/exercises/generatelists.js~exports",
+    "function/index.html#static-function-exports",
+    "<span>exports</span> <span class=\"search-result-import-path\">sitka/src/exercises/generateLists.js</span>",
+    "function"
+  ],
+  [
     "sitka/src/js/commandline.js~exports",
     "class/src/js/CommandLine.js~exports.html",
     "<span>exports</span> <span class=\"search-result-import-path\">sitka/src/js/CommandLine.js</span>",
+    "class"
+  ],
+  [
+    "sitka/src/js/shelldata.js~exports",
+    "class/src/js/ShellData.js~exports.html",
+    "<span>exports</span> <span class=\"search-result-import-path\">sitka/src/js/ShellData.js</span>",
+    "class"
+  ],
+  [
+    "sitka/src/js/termdata.js~exports",
+    "class/src/js/TermData.js~exports.html",
+    "<span>exports</span> <span class=\"search-result-import-path\">sitka/src/js/TermData.js</span>",
     "class"
   ],
   [
@@ -34,6 +70,54 @@ window.esdocSearchIndex = [
     "variable/index.html#static-variable-fs",
     "<span>fs</span> <span class=\"search-result-import-path\">sitka</span>",
     "variable"
+  ],
+  [
+    "sitka/src/exercises/generatelists.js~helpers",
+    "variable/index.html#static-variable-helpers",
+    "<span>helpers</span> <span class=\"search-result-import-path\">sitka/src/exercises/generateLists.js</span>",
+    "variable"
+  ],
+  [
+    "sitka/src/js/commandline.js~os",
+    "variable/index.html#static-variable-os",
+    "<span>os</span> <span class=\"search-result-import-path\">sitka/src/js/CommandLine.js</span>",
+    "variable"
+  ],
+  [
+    "sitka/src/js/commandline.js~pty",
+    "variable/index.html#static-variable-pty",
+    "<span>pty</span> <span class=\"search-result-import-path\">sitka/src/js/CommandLine.js</span>",
+    "variable"
+  ],
+  [
+    "sitka/src/exercises/generatorhelpers.js~randomchar",
+    "function/index.html#static-function-randomChar",
+    "<span>randomChar</span> <span class=\"search-result-import-path\">sitka/src/exercises/generatorHelpers.js</span>",
+    "function"
+  ],
+  [
+    "sitka/src/exercises/generatorhelpers.js~randomcorrectmessage",
+    "function/index.html#static-function-randomCorrectMessage",
+    "<span>randomCorrectMessage</span> <span class=\"search-result-import-path\">sitka/src/exercises/generatorHelpers.js</span>",
+    "function"
+  ],
+  [
+    "sitka/src/exercises/generatorhelpers.js~randomincorrectmessage",
+    "function/index.html#static-function-randomIncorrectMessage",
+    "<span>randomIncorrectMessage</span> <span class=\"search-result-import-path\">sitka/src/exercises/generatorHelpers.js</span>",
+    "function"
+  ],
+  [
+    "sitka/src/exercises/generatorhelpers.js~randomint",
+    "function/index.html#static-function-randomInt",
+    "<span>randomInt</span> <span class=\"search-result-import-path\">sitka/src/exercises/generatorHelpers.js</span>",
+    "function"
+  ],
+  [
+    "sitka/src/exercises/generatorhelpers.js~randomstring",
+    "function/index.html#static-function-randomString",
+    "<span>randomString</span> <span class=\"search-result-import-path\">sitka/src/exercises/generatorHelpers.js</span>",
+    "function"
   ],
   [
     "sitka/src/js/renderer.js~renderlogic",
@@ -324,10 +408,34 @@ window.esdocSearchIndex = [
     "external"
   ],
   [
+    "src/exercises/generatelists.js",
+    "file/src/exercises/generateLists.js.html",
+    "src/exercises/generateLists.js",
+    "file"
+  ],
+  [
+    "src/exercises/generatorhelpers.js",
+    "file/src/exercises/generatorHelpers.js.html",
+    "src/exercises/generatorHelpers.js",
+    "file"
+  ],
+  [
+    "src/exercises/index.js",
+    "file/src/exercises/index.js.html",
+    "src/exercises/index.js",
+    "file"
+  ],
+  [
     "src/js/commandline.js",
     "file/src/js/CommandLine.js.html",
     "src/js/CommandLine.js",
     "file"
+  ],
+  [
+    "src/js/commandline.js~exports#color",
+    "class/src/js/CommandLine.js~exports.html#instance-member-color",
+    "src/js/CommandLine.js~exports#color",
+    "member"
   ],
   [
     "src/js/commandline.js~exports#constructor",
@@ -336,39 +444,141 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/js/commandline.js~exports#lfc",
-    "class/src/js/CommandLine.js~exports.html#instance-member-lfc",
-    "src/js/CommandLine.js~exports#lfc",
-    "member"
-  ],
-  [
-    "src/js/commandline.js~exports#os",
-    "class/src/js/CommandLine.js~exports.html#instance-member-os",
-    "src/js/CommandLine.js~exports#os",
-    "member"
-  ],
-  [
-    "src/js/commandline.js~exports#prompt",
-    "class/src/js/CommandLine.js~exports.html#instance-method-prompt",
-    "src/js/CommandLine.js~exports#prompt",
+    "src/js/commandline.js~exports#getexpressionoutput",
+    "class/src/js/CommandLine.js~exports.html#instance-method-getExpressionOutput",
+    "src/js/CommandLine.js~exports#getExpressionOutput",
     "method"
   ],
   [
-    "src/js/commandline.js~exports#pty",
-    "class/src/js/CommandLine.js~exports.html#instance-member-pty",
-    "src/js/CommandLine.js~exports#pty",
+    "src/js/commandline.js~exports#promptterminal",
+    "class/src/js/CommandLine.js~exports.html#instance-method-promptTerminal",
+    "src/js/CommandLine.js~exports#promptTerminal",
+    "method"
+  ],
+  [
+    "src/js/commandline.js~exports#pythonexpression",
+    "class/src/js/CommandLine.js~exports.html#instance-method-pythonExpression",
+    "src/js/CommandLine.js~exports#pythonExpression",
+    "method"
+  ],
+  [
+    "src/js/commandline.js~exports#shell",
+    "class/src/js/CommandLine.js~exports.html#instance-member-shell",
+    "src/js/CommandLine.js~exports#shell",
     "member"
   ],
   [
-    "src/js/commandline.js~exports#python",
-    "class/src/js/CommandLine.js~exports.html#instance-method-python",
-    "src/js/CommandLine.js~exports#python",
-    "method"
+    "src/js/commandline.js~exports#shelldata",
+    "class/src/js/CommandLine.js~exports.html#instance-member-shellData",
+    "src/js/CommandLine.js~exports#shellData",
+    "member"
   ],
   [
     "src/js/commandline.js~exports#term",
     "class/src/js/CommandLine.js~exports.html#instance-member-term",
     "src/js/CommandLine.js~exports#term",
+    "member"
+  ],
+  [
+    "src/js/commandline.js~exports#termdata",
+    "class/src/js/CommandLine.js~exports.html#instance-member-termData",
+    "src/js/CommandLine.js~exports#termData",
+    "member"
+  ],
+  [
+    "src/js/commandline.js~exports#writeinshell",
+    "class/src/js/CommandLine.js~exports.html#instance-method-writeInShell",
+    "src/js/CommandLine.js~exports#writeInShell",
+    "method"
+  ],
+  [
+    "src/js/shelldata.js",
+    "file/src/js/ShellData.js.html",
+    "src/js/ShellData.js",
+    "file"
+  ],
+  [
+    "src/js/shelldata.js~exports#buildlines",
+    "class/src/js/ShellData.js~exports.html#instance-method-buildLines",
+    "src/js/ShellData.js~exports#buildLines",
+    "method"
+  ],
+  [
+    "src/js/shelldata.js~exports#callbackfunction",
+    "class/src/js/ShellData.js~exports.html#instance-member-callbackFunction",
+    "src/js/ShellData.js~exports#callbackFunction",
+    "member"
+  ],
+  [
+    "src/js/shelldata.js~exports#constructor",
+    "class/src/js/ShellData.js~exports.html#instance-constructor-constructor",
+    "src/js/ShellData.js~exports#constructor",
+    "method"
+  ],
+  [
+    "src/js/shelldata.js~exports#lastdata",
+    "class/src/js/ShellData.js~exports.html#instance-member-lastData",
+    "src/js/ShellData.js~exports#lastData",
+    "member"
+  ],
+  [
+    "src/js/shelldata.js~exports#lastline",
+    "class/src/js/ShellData.js~exports.html#instance-member-lastLine",
+    "src/js/ShellData.js~exports#lastLine",
+    "member"
+  ],
+  [
+    "src/js/shelldata.js~exports#linecallback",
+    "class/src/js/ShellData.js~exports.html#instance-member-lineCallback",
+    "src/js/ShellData.js~exports#lineCallback",
+    "member"
+  ],
+  [
+    "src/js/shelldata.js~exports#on",
+    "class/src/js/ShellData.js~exports.html#instance-method-on",
+    "src/js/ShellData.js~exports#on",
+    "method"
+  ],
+  [
+    "src/js/shelldata.js~exports#online",
+    "class/src/js/ShellData.js~exports.html#instance-method-onLine",
+    "src/js/ShellData.js~exports#onLine",
+    "method"
+  ],
+  [
+    "src/js/shelldata.js~exports#shell",
+    "class/src/js/ShellData.js~exports.html#instance-member-shell",
+    "src/js/ShellData.js~exports#shell",
+    "member"
+  ],
+  [
+    "src/js/termdata.js",
+    "file/src/js/TermData.js.html",
+    "src/js/TermData.js",
+    "file"
+  ],
+  [
+    "src/js/termdata.js~exports#callbackfunction",
+    "class/src/js/TermData.js~exports.html#instance-member-callbackFunction",
+    "src/js/TermData.js~exports#callbackFunction",
+    "member"
+  ],
+  [
+    "src/js/termdata.js~exports#constructor",
+    "class/src/js/TermData.js~exports.html#instance-constructor-constructor",
+    "src/js/TermData.js~exports#constructor",
+    "method"
+  ],
+  [
+    "src/js/termdata.js~exports#on",
+    "class/src/js/TermData.js~exports.html#instance-method-on",
+    "src/js/TermData.js~exports#on",
+    "method"
+  ],
+  [
+    "src/js/termdata.js~exports#term",
+    "class/src/js/TermData.js~exports.html#instance-member-term",
+    "src/js/TermData.js~exports#term",
     "member"
   ],
   [

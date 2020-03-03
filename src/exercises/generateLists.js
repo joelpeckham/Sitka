@@ -1,16 +1,12 @@
-function getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
-}
-
+let helpers = require('./generatorHelpers.js');
+console.dir(helpers)
 module.exports = function generateLists(config = null) {
 
   let randomList = []
   let randomListx2 = []
 
   for (let i = 0; i < 5; i++){
-    rand = getRandomInt(-100,101)
+    let rand = helpers.randomInt(-100,101);
     randomList.push(rand)
     randomListx2.push(rand*2)
   }
@@ -25,8 +21,8 @@ module.exports = function generateLists(config = null) {
       console.log(response)
       return {
         result: (response.teardown.y == randomListx2),
-        correctMessage: "You got it right",
-        wrongMessage: "Hmm. Try again."
+        correctMessage: helpers.randomCorrectMessage(),
+        wrongMessage: helpers.randomIncorrectMessage()
       }
     }
   }

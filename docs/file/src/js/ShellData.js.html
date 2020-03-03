@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <base data-ice="baseUrl" href="../../../">
-  <title data-ice="title">src/js/renderer.js | sitka</title>
+  <title data-ice="title">src/js/ShellData.js | sitka</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
@@ -54,41 +54,47 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><h1 data-ice="title">src/js/renderer.js</h1>
-<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">async function renderLogic() {
-  let CommandLine = require(&quot;./CommandLine.js&quot;);
-  const cmd = new CommandLine(document.getElementById(&apos;xterm&apos;), {
-    cursorStyle:&apos;bar&apos;,
-    cols: 80,
-    rows: 45,
-  	allowTransparency:true,
-  	theme:{background: &apos;rgba(255, 255, 255, 0.0)&apos;}
-  });
-
-  let exercises = require(&quot;./../exercises/&quot;);
-  let generateLists = exercises.generateLists;
-
-  cmd.promptTerminal(`Hello, Joel. I&apos;m ${cmd.color.red}Sika.${cmd.color.reset}`)
-  cmd.promptTerminal(&quot;Here&apos;s a python prompt.\n&quot;)
-
-  let incorrect = true;
-  while (incorrect){
-
-    let {question, pre, post, check} = generateLists()
-    cmd.promptTerminal(question)
-    answer = await cmd.pythonExpression([pre], [post])
-    let {result, correctMessage, wrongMessage} = check(answer)
-    if (result) {cmd.promptTerminal(correctMessage); incorrect = false;}
-    else{cmd.promptTerminal(wrongMessage)}
-    cmd.promptTerminal(&apos;&apos;)
+<div class="content" data-ice="content"><h1 data-ice="title">src/js/ShellData.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">module.exports = class ShellData {
+  constructor(shell){
+    this.shell = shell;
+    this.callbackFunction = (data) =&gt; {};
+    this.lineCallback = (data) =&gt; {};
+    this.shell.on(&apos;data&apos;, data =&gt; {
+      this.callbackFunction(data);
+      this.buildLines(data);
+      this.lastData = data;
+    });
+    this.lastLine = &apos;&apos;
+    this.lastData = null
+  }
+  on(callbackFunction){
+    this.callbackFunction = callbackFunction;
   }
 
-  console.dir(answer)
-  cmd.promptTerminal(&quot;Ok. Lesson&apos;s Over.&quot;)
-}
+  onLine(callbackFunction){
+    this.lineCallback = callbackFunction;
+  }
 
-// call the main function
-renderLogic();
+  buildLines(data){
+
+    let newLineIndex = data.indexOf(&apos;\n&apos;);
+
+    if (newLineIndex != -1){
+      this.lastLine += data.slice(0,newLineIndex + 1);
+      let tail = data.slice(newLineIndex + 1);
+      this.lineCallback(this.lastLine);
+      this.lastLine = &apos;&apos;;
+      this.buildLines(tail);
+    }
+
+    else{
+      this.lastLine += data;
+    }
+
+  }
+
+}
 </code></pre>
 
 </div>

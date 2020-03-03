@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <base data-ice="baseUrl" href="../../../">
-  <title data-ice="title">src/js/renderer.js | sitka</title>
+  <title data-ice="title">src/exercises/generatorHelpers.js | sitka</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
@@ -54,41 +54,66 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><h1 data-ice="title">src/js/renderer.js</h1>
-<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">async function renderLogic() {
-  let CommandLine = require(&quot;./CommandLine.js&quot;);
-  const cmd = new CommandLine(document.getElementById(&apos;xterm&apos;), {
-    cursorStyle:&apos;bar&apos;,
-    cols: 80,
-    rows: 45,
-  	allowTransparency:true,
-  	theme:{background: &apos;rgba(255, 255, 255, 0.0)&apos;}
-  });
-
-  let exercises = require(&quot;./../exercises/&quot;);
-  let generateLists = exercises.generateLists;
-
-  cmd.promptTerminal(`Hello, Joel. I&apos;m ${cmd.color.red}Sika.${cmd.color.reset}`)
-  cmd.promptTerminal(&quot;Here&apos;s a python prompt.\n&quot;)
-
-  let incorrect = true;
-  while (incorrect){
-
-    let {question, pre, post, check} = generateLists()
-    cmd.promptTerminal(question)
-    answer = await cmd.pythonExpression([pre], [post])
-    let {result, correctMessage, wrongMessage} = check(answer)
-    if (result) {cmd.promptTerminal(correctMessage); incorrect = false;}
-    else{cmd.promptTerminal(wrongMessage)}
-    cmd.promptTerminal(&apos;&apos;)
-  }
-
-  console.dir(answer)
-  cmd.promptTerminal(&quot;Ok. Lesson&apos;s Over.&quot;)
+<div class="content" data-ice="content"><h1 data-ice="title">src/exercises/generatorHelpers.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">function randomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
 }
+exports.randomInt = randomInt;
 
-// call the main function
-renderLogic();
+function randomChar(includeCaps = true, includeDigits = false) {
+    let lowers = &quot;abcdefghijklmnopqrstuvwxyz&quot;
+    let uppers = &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;
+    let digits = &quot;0123456789&quot;
+    let chars = lower
+    if (includeCaps) {chars += uppers}
+    if (includeDigits) {chars += digits}
+    return chars[randomInt(0,chars.length)]
+}
+exports.randomChar = randomChar;
+
+function randomString(length, includeCaps = true, includeDigits = false) {
+    let str = &quot;&quot;
+    for (let i = 0; i &lt; length; i++){
+      str += randomChar(includeCaps, includeDigits)
+    }
+    return str
+}
+exports.randomString = randomString;
+
+function randomIncorrectMessage() {
+  messages = [
+    &quot;Hey. Mistakes only help you learn. Try again.&quot;,
+    &quot;Hmm. Let&apos;s give that another take...&quot;,
+    &quot;That&apos;s not exactly what I looking for...&quot;,
+    &quot;Not quite. Give&apos;r another go.&quot;,
+    &quot;I wish that was correct... But, try again.&quot;,
+    &quot;Good try, but no luck. Keep going. You&apos;ve got this...&quot;,
+    &quot;Nope.&quot;,
+    &quot;Very much not correct.&quot;,
+    &quot;Sadly, that&apos;s wrong.&quot;,
+    &quot;That&apos;s incorrect.&quot;,
+    &quot;Wrong answer, bud.&quot;
+  ]
+  return messages[randomInt(0,messages.length)]
+}
+exports.randomIncorrectMessage = randomIncorrectMessage;
+
+function randomCorrectMessage() {
+  messages = [
+    &quot;That&apos;s correct!&quot;,
+    &quot;Nice job. You must have a HUGE brain.&quot;,
+    &quot;100% correct, bud.&quot;,
+    &quot;Good one!&quot;,
+    &quot;Success!&quot;,
+    &quot;Nice solution!&quot;,
+    &quot;Problem solved.&quot;,
+    &quot;That&apos;s perfect. Easy, right?&quot;
+  ]
+  return messages[randomInt(0,messages.length)]
+}
+exports.randomCorrectMessage = randomCorrectMessage;
 </code></pre>
 
 </div>
