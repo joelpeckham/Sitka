@@ -29,7 +29,7 @@ module.exports = class CommandLine {
     let promised = await new Promise ((resolve, reject) => {
       this.shellData.on(data => {
         lastCallback(data);
-        console.log(data)
+        //console.log(data)
         if (trim) {data = data.trim()}
         if (data == expected) { resolve();}
       });
@@ -37,6 +37,26 @@ module.exports = class CommandLine {
     });
     this.shellData.callbackFunction = lastCallback;
     return promised
+  }
+
+  async getExpression(){
+    let output = '';
+    let seenOutput = false;
+    var checkForPrompt = null;
+    let promised = await new Promise ((resolve, reject) => {
+      this.shellData.onLine(line => {
+        if ( !line.startsWith('>>> ') && !line.startsWith('... ')){
+          seenOutput = true;
+          output += line;
+        }
+      });
+      checkForPrompt = setInterval(() => {
+        console.log("Interval.")
+        if (seenOutput && this.shellData.lastData == '>>> ') { resolve(output) };
+      }, 100);
+    });
+    clearInterval(checkForPrompt);
+    return promised;
   }
 
   async pythonExpression(setupExpressions = [], teardownExpressions = []){
@@ -61,7 +81,8 @@ module.exports = class CommandLine {
     this.shellData.on(data => {this.term.write(data)});
     this.termData.on(data => this.shell.write(data));
 
-    await this.writeInShell("", "done", false, true)
+    let output = await this.getExpression();
+    console.log(output)
 
     //Teardown Logic
     this.termData.on(data => {});
