@@ -19,35 +19,54 @@ module.exports = class CommandLine {
     this.termData = new TermData(this.term)
   }
 
-  prompt(prompt){
+  promptTerminal(prompt){
     this.term.writeln(prompt)
   }
 
-  async pythonExpression(){
+  async writeInShell(str, expected, timeout = 0.1, trim = false){
+    let lastCallback = this.shellData.callbackFunction;
+    this.shell.write(str)
+    let promised = await new Promise ((resolve, reject) => {
+      this.shellData.on(data => {
+        lastCallback(data);
+        console.log(data)
+        if (trim) {data = data.trim()}
+        if (data == expected) { resolve();}
+      });
+      if (timeout) {setTimeout(() => {reject('Timeout printing string in shell.')}, timeout * 1000)};
+    });
+    this.shellData.callbackFunction = lastCallback;
+    return promised
+  }
 
-    this.prompt("\n"+"-".repeat(this.term.cols)+'\n')
-    this.termData.on(data => this.shell.write(data))
-    let parser = new ParsePython()
+  async pythonExpression(setupExpressions = [], teardownExpressions = []){
+
+    this.promptTerminal("\n"+"-".repeat(this.term.cols)+'\n')
+
+    // this.shellData.on(data => {this.term.write(data)});
+    // this.termData.on(data => this.shell.write(data));
+    //let parser = new ParsePython()
 
     //Setup Logic
-    this.shell.write('python3\n')
-    this.shell.write("from time import sleep\n")
-    this.shell.write("print('setupDone | aEVJgX5Mfr01czdSI7Ln')\n")
+    await this.writeInShell('python3\n','>>> ');
+    await this.writeInShell("from time import sleep\n",'>>> ');
 
-    let answer = await new Promise ((resolve, reject) => {
-      this.shellData.on(data => {
-        let {resolved, answer, display} = parser.parse(data);
-        if (resolved) {resolve(answer)};
-        if (display) {this.term.write(data)};
-      });
-    });
+    // for (const expression of setupExpressions) {
+    //   this.shell.write(expression + '\n')
+    // }
 
+    let userStartSentinel = 'setupDone | aEVJgX5Mfr01czdSI7Ln'
+    await this.writeInShell(`print('${userStartSentinel}')\n`, userStartSentinel, 0.1, true)
+
+    this.shellData.on(data => {this.term.write(data)});
+    this.termData.on(data => this.shell.write(data));
+
+    await this.writeInShell("", "done", false, true)
 
     //Teardown Logic
     this.termData.on(data => {});
     this.shellData.on(data => {});
     this.shell.write('exit()\n');
-    this.prompt("\n"+"-".repeat(this.term.cols));
-    return answer
+    return ""
   }
 }
