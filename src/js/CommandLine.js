@@ -42,20 +42,27 @@ module.exports = class CommandLine {
   async getExpression(){
     let output = '';
     let seenOutput = false;
-    var checkForPrompt = null;
+    let lastCallback = this.shellData.callbackFunction;
+    let lastLineCB = this.shellData.lineCallback;
+
     let promised = await new Promise ((resolve, reject) => {
+
       this.shellData.onLine(line => {
         if ( !line.startsWith('>>> ') && !line.startsWith('... ')){
           seenOutput = true;
           output += line;
         }
       });
-      checkForPrompt = setInterval(() => {
-        console.log("Interval.")
-        if (seenOutput && this.shellData.lastData == '>>> ') { resolve(output) };
-      }, 100);
+
+      this.shellData.on(data => {
+        if (seenOutput && data == '>>> ') { resolve(output) }
+        else{this.term.write(data)};
+      });
+
     });
-    clearInterval(checkForPrompt);
+
+    this.shellData.lineCallback = lastLineCB;
+    this.shellData.callbackFunction = lastCallback;
     return promised;
   }
 
@@ -81,8 +88,7 @@ module.exports = class CommandLine {
     this.shellData.on(data => {this.term.write(data)});
     this.termData.on(data => this.shell.write(data));
 
-    let output = await this.getExpression();
-    console.log(output)
+    let userOutput = await this.getExpression();
 
     //Teardown Logic
     this.termData.on(data => {});
