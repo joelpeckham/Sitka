@@ -38,11 +38,13 @@ module.exports = class CommandLine {
     return promised
   }
 
-  async getExpression(){
+  async getExpressionOutput(expression = null){
+    if (expression) {this.shell.write(expression + '\n')};
     let output = '';
     let seenOutput = false;
     let lastCallback = this.shellData.callbackFunction;
     let lastLineCB = this.shellData.lineCallback;
+    let lastLine = null;
 
     let promised = await new Promise ((resolve, reject) => {
 
@@ -51,11 +53,13 @@ module.exports = class CommandLine {
           seenOutput = true;
           output += line;
         }
+        lastLine = line;
       });
 
       this.shellData.on(data => {
-        if (seenOutput && data == '>>> ') { resolve(output) }
-        else{this.term.write(data)};
+        if (lastLine && lastLine.startsWith('>>> ') && data == '>>> '){ resolve('') }
+        else if (seenOutput && data == '>>> ') { resolve(output) }
+        else{lastCallback(data)};
       });
 
     });
@@ -71,7 +75,10 @@ module.exports = class CommandLine {
 
     //Setup Logic
     await this.writeInShell('python3\n','>>> ');
-    await this.writeInShell("from time import sleep\n",'>>> ');
+
+    for (let exp of setupExpressions){
+      await this.writeInShell(exp+'\n','>>> ');
+    }
 
     let userStartSentinel = 'setupDone | aEVJgX5Mfr01czdSI7Ln'
     await this.writeInShell(`print('${userStartSentinel}')\n`, userStartSentinel, 0.1, true)
@@ -79,12 +86,18 @@ module.exports = class CommandLine {
     this.shellData.on(data => {this.term.write(data)});
     this.termData.on(data => this.shell.write(data));
 
-    let userOutput = await this.getExpression();
+    let userOutput = await this.getExpressionOutput();
 
     //Teardown Logic
     this.termData.on(data => {});
     this.shellData.on(data => {});
+
+    let teardownOutput = []
+    for (let exp of teardownExpressions){
+      teardownOutput.push({expression: exp, output: await this.getExpressionOutput(exp)})
+    }
+
     this.shell.write('exit()\n');
-    return ""
+    return {userOutput: userOutput, teardown: teardownOutput}
   }
 }
