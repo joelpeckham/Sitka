@@ -42,6 +42,12 @@ window.esdocSearchIndex = [
     "variable"
   ],
   [
+    "sitka/src/exercises/generateaddition.js~exports",
+    "function/index.html#static-function-exports",
+    "<span>exports</span> <span class=\"search-result-import-path\">sitka/src/exercises/generateAddition.js</span>",
+    "function"
+  ],
+  [
     "sitka/src/exercises/generatelists.js~exports",
     "function/index.html#static-function-exports",
     "<span>exports</span> <span class=\"search-result-import-path\">sitka/src/exercises/generateLists.js</span>",
@@ -69,6 +75,12 @@ window.esdocSearchIndex = [
     "sitka~fs",
     "variable/index.html#static-variable-fs",
     "<span>fs</span> <span class=\"search-result-import-path\">sitka</span>",
+    "variable"
+  ],
+  [
+    "sitka/src/exercises/generateaddition.js~helpers",
+    "variable/index.html#static-variable-helpers",
+    "<span>helpers</span> <span class=\"search-result-import-path\">sitka/src/exercises/generateAddition.js</span>",
     "variable"
   ],
   [
@@ -406,6 +418,12 @@ window.esdocSearchIndex = [
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined",
     "src/.external-ecmascript.js~undefined",
     "external"
+  ],
+  [
+    "src/exercises/generateaddition.js",
+    "file/src/exercises/generateAddition.js.html",
+    "src/exercises/generateAddition.js",
+    "file"
   ],
   [
     "src/exercises/generatelists.js",

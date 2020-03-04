@@ -1,4 +1,5 @@
 async function renderLogic() {
+
   let CommandLine = require("./CommandLine.js");
   const cmd = new CommandLine(document.getElementById('xterm'), {
     cursorStyle:'bar',

@@ -30,11 +30,13 @@
   <ul>
     
   <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#exercises">exercises</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-exports">exports</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-exports">exports</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-randomChar">randomChar</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-randomCorrectMessage">randomCorrectMessage</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-randomIncorrectMessage">randomIncorrectMessage</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-randomInt">randomInt</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-randomString">randomString</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-helpers">helpers</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-helpers">helpers</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#js">js</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/js/CommandLine.js~exports.html">exports</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/js/ShellData.js~exports.html">exports</a></span></span></li>
@@ -56,6 +58,7 @@
 
 <div class="content" data-ice="content"><h1 data-ice="title">src/js/renderer.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">async function renderLogic() {
+
   let CommandLine = require(&quot;./CommandLine.js&quot;);
   const cmd = new CommandLine(document.getElementById(&apos;xterm&apos;), {
     cursorStyle:&apos;bar&apos;,
@@ -66,25 +69,41 @@
   });
 
   let exercises = require(&quot;./../exercises/&quot;);
-  let generateLists = exercises.generateLists;
 
-  cmd.promptTerminal(`Hello, Joel. I&apos;m ${cmd.color.red}Sika.${cmd.color.reset}`)
-  cmd.promptTerminal(&quot;Here&apos;s a python prompt.\n&quot;)
-
-  let incorrect = true;
-  while (incorrect){
-
-    let {question, pre, post, check} = generateLists()
-    cmd.promptTerminal(question)
-    answer = await cmd.pythonExpression([pre], [post])
-    let {result, correctMessage, wrongMessage} = check(answer)
-    if (result) {cmd.promptTerminal(correctMessage); incorrect = false;}
-    else{cmd.promptTerminal(wrongMessage)}
-    cmd.promptTerminal(&apos;&apos;)
+  //activityTemplate = {type:&apos;python&apos;, content: &quot;generatorName&quot;} or {type:&apos;prompt&apos;, content: &quot;text&quot;}
+  let pythonRender = async (generatorName) =&gt; {
+    let incorrect = true;
+    while (incorrect){
+      let {question, pre, post, check} = exercises[generatorName]()
+      cmd.promptTerminal(question)
+      answer = await cmd.pythonExpression(pre, post)
+      let {result, correctMessage, wrongMessage} = check(answer)
+      if (result) {cmd.promptTerminal(correctMessage); incorrect = false;}
+      else{cmd.promptTerminal(wrongMessage)}
+      cmd.promptTerminal(&apos;&apos;)
+    }
   }
 
-  console.dir(answer)
-  cmd.promptTerminal(&quot;Ok. Lesson&apos;s Over.&quot;)
+  let promptRender = (prompt) =&gt; {
+    cmd.promptTerminal(prompt)
+  }
+
+  let lesson = [
+    {type:&apos;prompt&apos;, content:&quot;Starting lesson.&quot;},
+    {type:&apos;python&apos;, content:&quot;generateAddition&quot;},
+    {type:&apos;prompt&apos;, content:&quot;Ok. Here&apos;s a harder type of question:&quot;},
+    {type:&apos;python&apos;, content:&quot;generateLists&quot;},
+    {type:&apos;prompt&apos;, content:&quot;Ok. We&apos;re done for the day.&quot;},
+  ]
+
+  const typeHandlers = {
+    prompt: promptRender,
+    python: pythonRender
+  }
+
+  for (let activity of lesson){
+    await typeHandlers[activity.type](activity.content)
+  }
 }
 
 // call the main function
