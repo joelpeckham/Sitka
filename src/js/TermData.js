@@ -5,7 +5,6 @@ module.exports = class TermData {
     this.blockData = false
 
     this.term.onData(data => {
-      console.dir({data:data})
       if (this.isGoodData(data)) {this.callbackFunction(data)}
     })
   }
