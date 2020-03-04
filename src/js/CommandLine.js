@@ -87,6 +87,7 @@ module.exports = class CommandLine {
     await this.writeInShell('python3\n','>>> ');
 
     for (let exp of setupExpressions){
+      //console.log()
       await this.writeInShell(exp+'\n','>>> ');
     }
 

@@ -31,6 +31,7 @@ async function renderLogic() {
 
   let lesson = [
     {type:'prompt', content:"Starting lesson."},
+    {type:'python', content:"generateInput"},
     {type:'python', content:"generateAddition"},
     {type:'prompt', content:"Ok. Here's a harder type of question:"},
     {type:'python', content:"generateLists"},
