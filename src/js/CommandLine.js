@@ -16,6 +16,7 @@ module.exports = class CommandLine {
     });
     this.shellData = new ShellData(this.shell);
     this.termData = new TermData(this.term);
+    this.termData.blockData = true;
 
     this.color = {
       black:    '\u001b[30m',

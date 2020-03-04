@@ -11,7 +11,6 @@ module.exports = function generateAddition(config = null) {
     pre: [`a = ${a}`,`b = ${b}`], // set things up--variables, utility functions, etc.
     post: [], // output whatever you asked the student to set up so we can check it
     check: function(response){
-      console.log(response)
       return {
         result: (response.userOutput == ans),
         correctMessage: helpers.randomCorrectMessage(),

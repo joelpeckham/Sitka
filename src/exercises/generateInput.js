@@ -6,10 +6,9 @@ module.exports = function generateInput(config = null) {
 
   return {
     question: `Assign the variable x with user input.`,
-    pre: [`pyInput = input`,`def input(prompt):\n    pyInput(prompt)\n    return (${randNum})\n`], // set things up--variables, utility functions, etc.
+    pre: [`pyInput = input`,`def input(prompt = ''):\n    pyInput(prompt)\n    return (${randNum})\n`], // set things up--variables, utility functions, etc.
     post: ['x'], // output whatever you asked the student to set up so we can check it
     check: function(response){
-      console.log(response)
       return {
         result: (response.teardown.x == randNum),
         correctMessage: helpers.randomCorrectMessage(),

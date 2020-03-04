@@ -18,7 +18,6 @@ module.exports = function generateLists(config = null) {
     pre: [`y = ${randomList}`], // set things up--variables, utility functions, etc.
     post: ["y"], // output whatever you asked the student to set up so we can check it
     check: function(response){
-      console.log(response)
       return {
         result: (response.teardown.y == randomListx2),
         correctMessage: helpers.randomCorrectMessage(),
