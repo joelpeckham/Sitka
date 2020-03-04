@@ -9,25 +9,41 @@ async function renderLogic() {
   });
 
   let exercises = require("./../exercises/");
-  let generateLists = exercises.generateLists;
 
-  cmd.promptTerminal(`Hello, Joel. I'm ${cmd.color.red}Sika.${cmd.color.reset}`)
-  cmd.promptTerminal("Here's a python prompt.\n")
-
-  let incorrect = true;
-  while (incorrect){
-
-    let {question, pre, post, check} = generateLists()
-    cmd.promptTerminal(question)
-    answer = await cmd.pythonExpression([pre], [post])
-    let {result, correctMessage, wrongMessage} = check(answer)
-    if (result) {cmd.promptTerminal(correctMessage); incorrect = false;}
-    else{cmd.promptTerminal(wrongMessage)}
-    cmd.promptTerminal('')
+  //activityTemplate = {type:'python', content: "generatorName"} or {type:'prompt', content: "text"}
+  let pythonRender = async (generatorName) => {
+    let incorrect = true;
+    while (incorrect){
+      let {question, pre, post, check} = exercises[generatorName]()
+      cmd.promptTerminal(question)
+      answer = await cmd.pythonExpression(pre, post)
+      let {result, correctMessage, wrongMessage} = check(answer)
+      if (result) {cmd.promptTerminal(correctMessage); incorrect = false;}
+      else{cmd.promptTerminal(wrongMessage)}
+      cmd.promptTerminal('')
+    }
   }
 
-  console.dir(answer)
-  cmd.promptTerminal("Ok. Lesson's Over.")
+  let promptRender = (prompt) => {
+    cmd.promptTerminal(prompt)
+  }
+
+  let lesson = [
+    {type:'prompt', content:"Starting lesson."},
+    {type:'python', content:"generateAddition"},
+    {type:'prompt', content:"Ok. Here's a harder type of question:"},
+    {type:'python', content:"generateLists"},
+    {type:'prompt', content:"Ok. We're done for the day."},
+  ]
+
+  const typeHandlers = {
+    prompt: promptRender,
+    python: pythonRender
+  }
+
+  for (let activity of lesson){
+    await typeHandlers[activity.type](activity.content)
+  }
 }
 
 // call the main function
