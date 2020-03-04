@@ -5,6 +5,7 @@ module.exports = class TermData {
     this.blockData = false
 
     this.term.onData(data => {
+      console.dir({data:data})
       if (this.isGoodData(data)) {this.callbackFunction(data)}
     })
   }
@@ -14,7 +15,7 @@ module.exports = class TermData {
   }
 
   isGoodData(data){
-    let badStrings = ["[A","[B"]
+    let badStrings = ["[A","[B", "", "", ""]
     if (this.blockData && badStrings.indexOf(data) >= 0) {return false}
     else{return true}
   }
