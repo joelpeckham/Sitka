@@ -1,4 +1,4 @@
-// src/electron.js
+// src/electron.ts
 const { app, BrowserWindow } = require('electron');
 
 function createWindow () {
