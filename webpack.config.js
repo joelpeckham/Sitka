@@ -1,11 +1,21 @@
 // webpack.config.js
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
+//const webpackTargetElectronRenderer = require('webpack-target-electron-renderer');
 
-module.exports = [
+
+const BUILD_DIR = path.resolve(__dirname, 'dist');
+const APP_DIR = path.resolve(__dirname, 'src');
+
+var config = [
   {
     mode: 'development',
-    entry: './src/electron.ts',
+    entry: APP_DIR + '/js/electron.ts',
     target: 'electron-main',
+    node: {
+      __dirname: false,
+      __filename: false
+    },
     module: {
       rules: [{
         test: /\.ts$/,
@@ -14,16 +24,20 @@ module.exports = [
       }]
     },
     output: {
-      path: __dirname + '/dist',
+      path: BUILD_DIR,
       filename: 'electron.js'
     },
   },
 
   {
     mode: 'development',
-    entry: './src/react.tsx',
+    entry: APP_DIR + '/js/react.tsx',
     target: 'electron-renderer',
     devtool: 'source-map',
+    node: {
+      __dirname: false,
+      __filename: false
+    },
     module: {
       rules: [{
         test: /\.ts(x?)$/,
@@ -32,13 +46,17 @@ module.exports = [
       }]
     },
     output: {
-      path: __dirname + '/dist',
+      path: BUILD_DIR,
       filename: 'react.js'
     },
     plugins: [
       new HtmlWebpackPlugin({
-        template: './src/index.html'
+        template: './src/html/index.html'
       }),
     ]
   },
 ];
+
+//config.target = webpackTargetElectronRenderer(config);
+
+module.exports = config;
