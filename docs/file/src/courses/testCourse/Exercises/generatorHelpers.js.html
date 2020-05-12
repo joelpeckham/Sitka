@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../../../">
+  <title data-ice="title">src/courses/testCourse/Exercises/generatorHelpers.js | sitka</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="A learning tool for command line."><meta property="twitter:card" content="summary"><meta property="twitter:title" content="sitka"><meta property="twitter:description" content="A learning tool for command line."></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  <a href="./manual/index.html" data-ice="manualHeaderLink">Manual</a>
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/joelpeckham/Sitka"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#courses-testcourse-exercises">courses/testCourse/Exercises</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-exports">exports</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-exports">exports</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-exports">exports</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-randomChar">randomChar</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-randomCorrectMessage">randomCorrectMessage</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-randomIncorrectMessage">randomIncorrectMessage</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-randomInt">randomInt</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-randomString">randomString</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-helpers">helpers</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-helpers">helpers</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-helpers">helpers</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#js">js</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/js/CommandLine.js~exports.html">exports</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/js/ShellData.js~exports.html">exports</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/js/TermData.js~exports.html">exports</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-createWindow">createWindow</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-renderLogic">renderLogic</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ShellData">ShellData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-TermData">TermData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Terminal">Terminal</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-os">os</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-pty">pty</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-BrowserWindow">BrowserWindow</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-app">app</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-dir">dir</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-fs">fs</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-CommandLine">CommandLine</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-fs">fs</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/courses/testCourse/Exercises/generatorHelpers.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">function randomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+}
+exports.randomInt = randomInt;
+
+function randomChar(includeCaps = true, includeDigits = false) {
+    let lowers = &quot;abcdefghijklmnopqrstuvwxyz&quot;
+    let uppers = &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;
+    let digits = &quot;0123456789&quot;
+    let chars = lower
+    if (includeCaps) {chars += uppers}
+    if (includeDigits) {chars += digits}
+    return chars[randomInt(0,chars.length)]
+}
+exports.randomChar = randomChar;
+
+function randomString(length, includeCaps = true, includeDigits = false) {
+    let str = &quot;&quot;
+    for (let i = 0; i &lt; length; i++){
+      str += randomChar(includeCaps, includeDigits)
+    }
+    return str
+}
+exports.randomString = randomString;
+
+function randomIncorrectMessage() {
+  messages = [
+    &quot;Hey. Mistakes only help you learn. Try again.&quot;,
+    &quot;Hmm. Let&apos;s give that another take...&quot;,
+    &quot;That&apos;s not exactly what I looking for...&quot;,
+    &quot;Not quite. Give&apos;r another go.&quot;,
+    &quot;I wish that was correct... But, try again.&quot;,
+    &quot;Good try, but no luck. Keep going. You&apos;ve got this...&quot;,
+    &quot;Nope.&quot;,
+    &quot;Very much not correct.&quot;,
+    &quot;Sadly, that&apos;s wrong.&quot;,
+    &quot;That&apos;s incorrect.&quot;,
+    &quot;Wrong answer, bud.&quot;
+  ]
+  return messages[randomInt(0,messages.length)]
+}
+exports.randomIncorrectMessage = randomIncorrectMessage;
+
+function randomCorrectMessage() {
+  messages = [
+    &quot;That&apos;s correct!&quot;,
+    &quot;Nice job. You must have a HUGE brain.&quot;,
+    &quot;100% correct, bud.&quot;,
+    &quot;Good one!&quot;,
+    &quot;Success!&quot;,
+    &quot;Nice solution!&quot;,
+    &quot;Problem solved.&quot;,
+    &quot;That&apos;s perfect. Easy, right?&quot;
+  ]
+  return messages[randomInt(0,messages.length)]
+}
+exports.randomCorrectMessage = randomCorrectMessage;
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

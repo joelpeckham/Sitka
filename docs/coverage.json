@@ -1,0 +1,107 @@
+{
+  "coverage": "9.61%",
+  "expectCount": 52,
+  "actualCount": 5,
+  "files": {
+    "src/courses/testCourse/Exercises/generateAddition.js": {
+      "expectCount": 2,
+      "actualCount": 0,
+      "undocumentLines": [
+        1,
+        3
+      ]
+    },
+    "src/courses/testCourse/Exercises/generateInput.js": {
+      "expectCount": 2,
+      "actualCount": 0,
+      "undocumentLines": [
+        1,
+        3
+      ]
+    },
+    "src/courses/testCourse/Exercises/generateLists.js": {
+      "expectCount": 2,
+      "actualCount": 0,
+      "undocumentLines": [
+        1,
+        3
+      ]
+    },
+    "src/courses/testCourse/Exercises/generatorHelpers.js": {
+      "expectCount": 5,
+      "actualCount": 0,
+      "undocumentLines": [
+        1,
+        8,
+        19,
+        28,
+        46
+      ]
+    },
+    "src/js/CommandLine.js": {
+      "expectCount": 16,
+      "actualCount": 0,
+      "undocumentLines": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        7,
+        8,
+        9,
+        12,
+        17,
+        18,
+        21,
+        34,
+        38,
+        54,
+        85
+      ]
+    },
+    "src/js/ShellData.js": {
+      "expectCount": 10,
+      "actualCount": 0,
+      "undocumentLines": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        9,
+        11,
+        14,
+        18,
+        22
+      ]
+    },
+    "src/js/TermData.js": {
+      "expectCount": 7,
+      "actualCount": 0,
+      "undocumentLines": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        12,
+        16
+      ]
+    },
+    "src/js/main.js": {
+      "expectCount": 5,
+      "actualCount": 5,
+      "undocumentLines": []
+    },
+    "src/js/renderer.js": {
+      "expectCount": 3,
+      "actualCount": 0,
+      "undocumentLines": [
+        1,
+        2,
+        4
+      ]
+    }
+  }
+}

@@ -21,7 +21,9 @@
   "homepage": "https://github.com/joelpeckham/Sitka#readme",
   "devDependencies": {
     "electron": "^8.2.5",
-    "electron-rebuild": "^1.10.1"
+    "electron-rebuild": "^1.10.1",
+    "esdoc": "^1.1.0",
+    "esdoc-standard-plugin": "^1.0.0"
   },
   "dependencies": {
     "fs-extra": "^8.1.0",

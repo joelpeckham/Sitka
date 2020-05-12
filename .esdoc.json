@@ -13,8 +13,6 @@
       "typeInference": {"enable": true},
       "manual": {
         "files": [
-          "./manual/Usage.md",
-          "./manual/fileStructure.md"
         ]
       }
     }
