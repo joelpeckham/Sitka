@@ -9,8 +9,31 @@
     <link rel="stylesheet" href="../../node_modules/xterm/css/xterm.css" />
   </head>
   <body>
-    <div id="xterm"></div>
-    <div id="trash"></div>
+    <div id = "grid">
+
+            <div id = "sidebar">
+                <h1>Terminal</h1>
+                <div class = "Divider"></div>
+                <p>This is a fake terminal. There's not much you can do.</p>
+                <p>Right now all this does is simulate a Python 3 REPL.</p>
+                <p>I've got lots of debugging to do:</p>
+
+                <ul>
+                  <li>Fix history in general. Right now it isn't implemented at all.</li>
+                  <li>Refactor to avoid globals and make functions more portable.</li>
+                </ul>
+
+                <div id = "grid-container">
+                    <p class="brk-btn" onclick="console.log('Hello!')">Back</p>
+                    <p class="brk-btn" onclick="console.log('Hello!')">Next</p>
+                </div>
+
+            </div>
+
+            <div id = "terminalWrapper">
+                <div id = "xterm"></div>
+            </div>
+        </div>
     <script>
       require('./../js/renderer.js')
     </script>
