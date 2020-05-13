@@ -5,10 +5,9 @@ function updateProgressDisplay(current, total){
   let line = document.getElementById("progressLine");
   let exerciseNumber = document.getElementById("exerciseNumber");
   let totalExerciseNumber = document.getElementById("totalExerciseNumber");
-
   exerciseNumber.innerHTML = current;
   totalExerciseNumber.innerHTML = total;
-  line.points[1].y  = ((current / total) * 100) + 1;
+  line.points[1].y  = ((current / total) * 99);
 }
 
 async function renderLogic() {
