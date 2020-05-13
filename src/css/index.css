@@ -1,12 +1,12 @@
 :root {
   --sidebarOpenWidth: 80vw;
-  --sidebarClosedWidth:3rem;
+  --sidebarClosedWidth:4rem;
   --bgColor:#202020;
+  --drawerMoveTime: 0.5s;
 }
 
 * {
   box-sizing: border-box;
-  transition: 0.55s ease-in-out;
 }
 
 body{
@@ -15,22 +15,29 @@ body{
 }
 
 #drawer-toggle {
-position: absolute;
-z-index: -10;
-opacity:0;
+  position: absolute;
+  z-index: -10;
+  opacity:0;
 }
 
-
+#drawer-toggle-label{
+  height:10rem;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  width:100%;
+}
 
 #drawer {
-position: fixed;
-top: 0;
-left:calc((var(--sidebarOpenWidth) - var(--sidebarClosedWidth)) * -1);
-height: 100%;
-width:var(--sidebarOpenWidth);
-display:grid;
-grid-template-columns: 1fr var(--sidebarClosedWidth);
-overflow: hidden;
+  position: fixed;
+  top: 0;
+  left:calc((var(--sidebarOpenWidth) - var(--sidebarClosedWidth)) * -1);
+  height: 100%;
+  width:var(--sidebarOpenWidth);
+  display:grid;
+  grid-template-columns: 1fr var(--sidebarClosedWidth);
+  overflow: hidden;
 }
 
 #drawer svg{
@@ -39,14 +46,16 @@ overflow: hidden;
   stroke:var(--bgColor);
   height:2rem;
   transform: scaleX(-1);
+  transition: 0.25s ease-in-out;
+
 }
 
 #drawer #peekingSection{
   background-color: #dddddd;
   height:100vh;
   display: flex;
-justify-content: center;
-align-items: center;
+  justify-content: center;
+  align-items: center;
 }
 #drawer #hiddenSection{
   background-color: #f0f0f0;
@@ -63,17 +72,16 @@ align-items: center;
   width: calc(100vh - var(--sidebarClosedWidth));
   height: 100vh;
   padding: 20px;
+  transition: var(--drawerMoveTime) ease-in-out;
 }
 
-div.xterm, div.xterm > * {
-    transition: none;
+div.hasDrawerAnimation, div.hasDrawerAnimation > * {
+  transition: var(--drawerMoveTime) ease-in-out;
 }
-
-/* checked styles (menu open state) */
 
 
 #drawer-toggle:checked ~ #drawer {
-left: 0px;
+  left: 0px;
 }
 
 #drawer-toggle:checked ~ #drawer svg{
@@ -81,5 +89,5 @@ left: 0px;
 }
 
 #drawer-toggle:checked ~ #page-content {
-left: var(--sidebarOpenWidth);
+  left: var(--sidebarOpenWidth);
 }
