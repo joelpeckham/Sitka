@@ -13,16 +13,41 @@ body{
 }
 
 #sidebar{
-    padding-top:0.8rem;
-    padding-left:2rem;
-    padding-right:4rem;
     margin:0;
+    display:grid;
     background-color: #f8f8f8;
     /* box-shadow: inset -15px 0px 15px -15px rgba(0,0,0,0.5); */
+
+    grid-template-columns: 1fr 1fr 0.25fr;
+}
+
+#sidebarMainNav{
+  background-color: #69d0c0;
+}
+
+#sidebarInterLessonNav{
+  background-color: #69bad0;
+}
+
+#sidebarExpandCollapse{
+  background-color: #6989d0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+#sidebarExpandCollapse #svgContainer{
+  height:3rem;
+  margin:0;
+}
+#sidebarExpandCollapse svg{
+  stroke-width:0.5rem;
+  margin: 0;
+  width:100%;
+  height:100%;
 }
 
 #terminalWrapper{
-
     position:relative;
 }
 
