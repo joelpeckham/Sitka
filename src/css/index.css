@@ -1,100 +1,85 @@
+:root {
+  --sidebarOpenWidth: 80vw;
+  --sidebarClosedWidth:3rem;
+  --bgColor:#202020;
+}
+
+* {
+  box-sizing: border-box;
+  transition: 0.55s ease-in-out;
+}
+
 body{
-  background-color: #202020;
-  font-family: 'Raleway', sans-serif;
-  margin:0;
-}
-#grid{
-    width: 100%;
-    padding:0;
-    margin:0;
-    display: grid;
-    grid-template-columns:1fr 4fr;
-    height:100vh;
+  background-color: var(--bgColor);
+  height: 100%;
 }
 
-#sidebar{
-    margin:0;
-    display:grid;
-    background-color: #f8f8f8;
-    /* box-shadow: inset -15px 0px 15px -15px rgba(0,0,0,0.5); */
-
-    grid-template-columns: 1fr 1fr 0.25fr;
+#drawer-toggle {
+position: absolute;
+z-index: -10;
+opacity:0;
 }
 
-#sidebarMainNav{
-  background-color: #69d0c0;
+
+
+#drawer {
+position: fixed;
+top: 0;
+left:calc((var(--sidebarOpenWidth) - var(--sidebarClosedWidth)) * -1);
+height: 100%;
+width:var(--sidebarOpenWidth);
+display:grid;
+grid-template-columns: 1fr var(--sidebarClosedWidth);
+overflow: hidden;
 }
 
-#sidebarInterLessonNav{
-  background-color: #69bad0;
-}
-
-#sidebarExpandCollapse{
-  background-color: #6989d0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-}
-#sidebarExpandCollapse #svgContainer{
-  height:3rem;
-  margin:0;
-}
-#sidebarExpandCollapse svg{
+#drawer svg{
   stroke-width:0.5rem;
   margin: 0;
-  width:100%;
-  height:100%;
+  stroke:var(--bgColor);
+  height:2rem;
+  transform: scaleX(-1);
 }
 
-#terminalWrapper{
-    position:relative;
+#drawer #peekingSection{
+  background-color: #dddddd;
+  height:100vh;
+  display: flex;
+justify-content: center;
+align-items: center;
+}
+#drawer #hiddenSection{
+  background-color: #f0f0f0;
+  height:100vh;
 }
 
-#xterm{
-    padding:1.5rem;
-    padding-bottom: 2.5rem;
-    position: absolute;
-    top:0;
-    left:0;
-    right:0;
-    bottom:0;
-}
-h1{
-    color:var(--highlight-color);
-    text-transform: uppercase;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-}
-p,li{
-    font-size: 0.8rem;
-    line-height: 1.2rem;
+/* actual page content pane */
+
+#page-content {
+  position: fixed;
+  top:0;
+  left: var(--sidebarClosedWidth);
+  overflow: hidden;
+  width: calc(100vh - var(--sidebarClosedWidth));
+  height: 100vh;
+  padding: 20px;
 }
 
-#sidebar p{
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    text-align: justify;
-}
-.Divider{
-    border-bottom: 0.2rem solid var(--highlight-color);
-
+div.xterm, div.xterm > * {
+    transition: none;
 }
 
-#grid-container{
-    position:absolute;
-    bottom:3rem;
-    display: grid;
-    grid-template-columns:auto auto;
-    grid-gap: 2rem;
+/* checked styles (menu open state) */
+
+
+#drawer-toggle:checked ~ #drawer {
+left: 0px;
 }
 
-.brk-btn {
-    position: relative;
-    background: none;
-    color: var(--highlight-color);
-    text-transform: uppercase;
-    text-decoration: none;
-    border: 0.2rem solid var(--highlight-color);
-    padding: 0.5rem 1rem;
+#drawer-toggle:checked ~ #drawer svg{
+  transform: scaleX(1);
+}
+
+#drawer-toggle:checked ~ #page-content {
+left: var(--sidebarOpenWidth);
 }
