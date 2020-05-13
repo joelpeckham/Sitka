@@ -1,4 +1,52 @@
 {
-  "courseName": "testCourse",
-  "lessons":["testLesson"]
+  "name": "testCourse",
+  "description":"This is a test course.",
+  "lessons":[
+    {
+      "name":"Lesson One",
+      "description":"Learn to add in python.",
+      "icon":"iconFile.png",
+      "activities": [
+        {
+          "prompt":"Do as I say.",
+          "images":["helpImage1.jpg, helpImage2.jpg"],
+          "exercise":"generateAddition.js",
+          "reward":"FinishedTask",
+          "completed": false
+        },
+        {
+          "prompt":"Do as I do.",
+          "images":[],
+          "exercise":"generateAddition.js",
+          "reward":"Mastery",
+          "completed": false
+        }
+      ]
+    },
+    {
+      "name":"Lesson Two",
+      "icon":"iconFile.png",
+      "description":"Learn to get input in python.",
+      "activities": [
+        {
+          "prompt":"Do as I say.",
+          "images":[],
+          "exercise":"generateInput.js",
+          "reward":"FinishedTask",
+          "completed": false
+        },
+        {
+          "prompt":"Do as I do.",
+          "images":["helpImage1.jpg, helpImage2.jpg"],
+          "exercise":"generateInput.js",
+          "reward":"Mastery",
+          "completed": false
+        }
+      ]
+    }
+  ],
+  "badges":[
+    {"name":"Finished Task", "description":"I finished the hard task.", "icon":"iconFile.png", "earned":false},
+    {"name":"Mastery", "description":"I mastered a task.", "icon":"iconFile.png", "earned":false}
+  ]
 }

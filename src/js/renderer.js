@@ -10,6 +10,10 @@ function updateProgressDisplay(current, total){
   line.points[1].y  = ((current / total) * 99);
 }
 
+function updateMenuDisplay(courseObject){
+
+}
+
 async function renderLogic() {
 
   const cmd = new CommandLine(document.getElementById('xterm'), {
@@ -28,6 +32,8 @@ async function renderLogic() {
   let lessonObject = require(lessonPath);
   let lesson = lessonObject.activities
   let exercises = require(exercisePath);
+
+  updateMenuDisplay();
 
   //activityTemplate = {type:'python', content: "generatorName"} or {type:'prompt', content: "text"}
   let pythonRender = async (generatorName) => {

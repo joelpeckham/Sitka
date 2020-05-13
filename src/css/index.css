@@ -44,6 +44,7 @@ body{
   stroke-width:0.5rem;
   margin: 0;
   stroke:var(--bgColor);
+  stroke:#f0f0f0;
   height:2rem;
   transform: scaleX(-1);
   transition: transform 0.3s;
@@ -65,14 +66,14 @@ body{
   stroke-width:1rem;
   stroke:#44b6e7;
   height:90vh;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 #lessonProgress p{
   text-align: center;
   font-family: sans-serif;
 }
-
-
 
 #drawer #peekingSection{
   background-color: #f0f0f0;
@@ -85,7 +86,7 @@ body{
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #ddd;
+  background-color: #202020;
 }
 /* #drawer #peekingSection #lessonProgress{
   height:100vh;
