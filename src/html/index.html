@@ -22,11 +22,24 @@
     </div>
 
     <div id = "peekingSection">
-      <label for="drawer-toggle" id="drawer-toggle-label">
-        <svg viewBox="0 0 100 100" fill="none" stroke="#ffffff">
-          <polyline id = "arrowPolyline" points = "50,10 20,50 50,90" stroke-linecap="round" stroke-linejoin="round" transform="translate(15 0)"/>
-        </svg>
-      </label>
+      <div id = "lessonProgress">
+        <div id = "lessonProgressLine">
+          <div id = "lineCenterFlex">
+            <svg viewBox="0 0 2 100" fill="none" p>
+              <polyline id = "underLine" stroke = "#dddddd"vector-effect="non-scaling-stroke" points = "1,1 1,99" stroke-linecap="round"/>
+              <polyline id = "progressLine" vector-effect="non-scaling-stroke" points = "1,1 1,89" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <p><span id = "exerciseNumber">?</span>/<span id = "totalExerciseNumber">?</span></p>
+        </div>
+      </div>
+      <div id = "toggleSection">
+        <label for="drawer-toggle" id="drawer-toggle-label">
+          <svg viewBox="0 0 100 100" fill="none" stroke="#ffffff">
+            <polyline id = "arrowPolyline" points = "50,10 20,50 50,90" stroke-linecap="round" stroke-linejoin="round" transform="translate(15 0)"/>
+          </svg>
+        </label>
+      </div>
     </div>
   </div>
   <div id="page-content">

@@ -1,8 +1,8 @@
 :root {
   --sidebarOpenWidth: 80vw;
-  --sidebarClosedWidth:4rem;
+  --sidebarClosedWidth:6rem;
   --bgColor:#202020;
-  --drawerMoveTime: 0.5s;
+  --drawerMoveTime: 0.30s;
 }
 
 * {
@@ -46,17 +46,53 @@ body{
   stroke:var(--bgColor);
   height:2rem;
   transform: scaleX(-1);
-  transition: 0.25s ease-in-out;
-
+  transition: transform 0.3s;
+}
+#lessonProgress{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width:100%;
 }
 
+#lineCenterFlex{
+  display: flex;
+  justify-content: center;
+}
+
+#lessonProgressLine svg{
+  align-content: center;
+  stroke-width:1rem;
+  stroke:#44b6e7;
+  height:90vh;
+}
+
+#lessonProgress p{
+  text-align: center;
+  font-family: sans-serif;
+}
+
+
+
 #drawer #peekingSection{
-  background-color: #dddddd;
+  background-color: #f0f0f0;
+  height:100vh;
+  display:grid;
+  grid-template-columns: 4fr 1fr;
+}
+#drawer #peekingSection #toggleSection{
   height:100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #ddd;
 }
+/* #drawer #peekingSection #lessonProgress{
+  height:100vh;
+  display:grid;
+  grid-template-rows: 90fr 10fr;
+  background-color: #ddd;
+} */
 #drawer #hiddenSection{
   background-color: #f0f0f0;
   height:100vh;
@@ -69,14 +105,16 @@ body{
   top:0;
   left: var(--sidebarClosedWidth);
   overflow: hidden;
-  width: calc(100vh - var(--sidebarClosedWidth));
+  width: calc(100vw - var(--sidebarClosedWidth));
   height: 100vh;
   padding: 20px;
-  transition: var(--drawerMoveTime) ease-in-out;
+  transition: var(--drawerMoveTime) ease-out;
+  transition-property: width, left;
 }
 
 div.hasDrawerAnimation, div.hasDrawerAnimation > * {
-  transition: var(--drawerMoveTime) ease-in-out;
+  transition: var(--drawerMoveTime) ease-out;
+  transition-property: width, left;
 }
 
 

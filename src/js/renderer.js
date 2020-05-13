@@ -1,6 +1,16 @@
 const fs = require('fs');
 const CommandLine = require("./CommandLine.js");
 
+function updateProgressDisplay(current, total){
+  let line = document.getElementById("progressLine");
+  let exerciseNumber = document.getElementById("exerciseNumber");
+  let totalExerciseNumber = document.getElementById("totalExerciseNumber");
+
+  exerciseNumber.innerHTML = current;
+  totalExerciseNumber.innerHTML = total;
+  line.points[1].y  = ((current / total) * 100) + 1;
+}
+
 async function renderLogic() {
 
   const cmd = new CommandLine(document.getElementById('xterm'), {
@@ -44,8 +54,10 @@ async function renderLogic() {
   }
 
 
-  for (let activity of lesson){
-    await activityTypeHandlers[activity.type](activity.content)
+  for (let i = 0; i < lesson.length; i++){
+    let activity = lesson[i];
+    await activityTypeHandlers[activity.type](activity.content);
+    updateProgressDisplay(i+1, lesson.length);
   }
 }
 
