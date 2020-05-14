@@ -10,7 +10,7 @@ function updateProgressDisplay(current, total){
   line.points[1].y  = ((current / total) * 99);
 }
 
-function updateMenuDisplay(courseObject){
+function updateMenuDisplay(){
 
 }
 
@@ -25,10 +25,7 @@ async function renderLogic() {
   });
 
   let courseName = 'testCourse';
-  let lessonName = 'testLesson';
-
-  let lessonPath = `./../courses/${courseName}/${lessonName}.json`
-  let exercisePath = `./../courses/${courseName}/Exercises`
+  let coursePath = `./../courses/${courseName}/course.json`
   let lessonObject = require(lessonPath);
   let lesson = lessonObject.activities
   let exercises = require(exercisePath);
