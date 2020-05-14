@@ -10,14 +10,14 @@
         {
           "prompt":"Do as I say.",
           "images":["helpImage1.jpg, helpImage2.jpg"],
-          "exercise":"generateAddition.js",
+          "exercise":"generateAddition",
           "reward":"FinishedTask",
           "completed": false
         },
         {
           "prompt":"Do as I do.",
           "images":[],
-          "exercise":"generateAddition.js",
+          "exercise":"generateAddition",
           "reward":"Mastery",
           "completed": false
         }
@@ -31,14 +31,14 @@
         {
           "prompt":"Do as I say.",
           "images":[],
-          "exercise":"generateInput.js",
+          "exercise":"generateInput",
           "reward":"FinishedTask",
           "completed": false
         },
         {
           "prompt":"Do as I do.",
           "images":["helpImage1.jpg, helpImage2.jpg"],
-          "exercise":"generateInput.js",
+          "exercise":"generateInput",
           "reward":"Mastery",
           "completed": false
         }

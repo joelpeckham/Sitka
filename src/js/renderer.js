@@ -1,5 +1,12 @@
 const fs = require('fs');
 const CommandLine = require("./CommandLine.js");
+const cmd = new CommandLine(document.getElementById('xterm'), {
+  cursorStyle:'bar',
+  cols: 80,
+  rows: 45,
+  allowTransparency:true,
+  theme:{background: 'rgba(255, 255, 255, 0.0)'}
+});
 
 function updateProgressDisplay(current, total){
   let line = document.getElementById("progressLine");
@@ -14,25 +21,8 @@ function updateMenuDisplay(){
 
 }
 
-async function renderLogic() {
-
-  const cmd = new CommandLine(document.getElementById('xterm'), {
-    cursorStyle:'bar',
-    cols: 80,
-    rows: 45,
-  	allowTransparency:true,
-  	theme:{background: 'rgba(255, 255, 255, 0.0)'}
-  });
-
-  let courseName = 'testCourse';
-  let coursePath = `./../courses/${courseName}/course.json`
-  let lessonObject = require(lessonPath);
-  let lesson = lessonObject.activities
-  let exercises = require(exercisePath);
-
-  updateMenuDisplay();
-
-  //activityTemplate = {type:'python', content: "generatorName"} or {type:'prompt', content: "text"}
+async function updateActivityView(lesson){
+  let exercises = require(`./../courses/testCourse/Exercises`);
   let pythonRender = async (generatorName) => {
     let incorrect = true;
     while (incorrect){
@@ -45,7 +35,6 @@ async function renderLogic() {
       cmd.promptTerminal('')
     }
   }
-
   let promptRender = (prompt) => {
     cmd.promptTerminal(prompt)
   }
@@ -58,9 +47,22 @@ async function renderLogic() {
 
   for (let i = 0; i < lesson.length; i++){
     let activity = lesson[i];
-    await activityTypeHandlers[activity.type](activity.content);
     updateProgressDisplay(i+1, lesson.length);
+    await pythonRender(activity.exercise);
   }
+}
+
+async function renderLogic() {
+
+  let courseName = 'testCourse';
+  let coursePath = `./../courses/${courseName}/course.json`
+  let courseObject = require(coursePath);
+  let lesson = courseObject.lessons[0].activities
+  console.log(lesson);
+
+  updateMenuDisplay();
+  updateActivityView(lesson);
+
 }
 
 // call the main function
