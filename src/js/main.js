@@ -2,13 +2,15 @@
  * app is the main Electron app object.
  * @type {Object}
  */
-const { app } = require('electron')
+const { app, ipcMain } = require('electron')
 
 /**
  * BrowserWindow a class for creating windows in Electron.
  * @type {Function}
  */
 const { BrowserWindow } = require('electron')
+
+let addWindow;
 
 // Create Home Folder
 
@@ -54,10 +56,20 @@ function createWindow () {
   })
 
   // and load the index.html of the app.
-  win.loadFile('src/html/index.html')
-
+  win.loadFile('src/html/index.html');
   // Open the DevTools.
   // win.webContents.openDevTools()
+}
+
+// Handle add item window
+function createAddWindow(){
+  addWindow = new BrowserWindow({
+    width: 300,
+    height:200,
+    title:'Settings'
+  });
+  addWindow.loadFile('src/html/settings.html');
+
 }
 
 // This method will be called when Electron has finished
@@ -81,6 +93,17 @@ app.on('activate', () => {
     createWindow()
   }
 })
+
+
+// Catch item:add
+ipcMain.on('item:add', function(e, item){
+  if (!addWindow){
+    createAddWindow();
+  }
+  else{
+    addWindow.show()
+  }
+});
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.

@@ -49,6 +49,18 @@ body{
   transform: scaleX(-1);
   transition: transform 0.3s;
 }
+
+#menuGrid{
+  display:grid;
+  grid-template-columns: 4rem 1fr;
+}
+#settingsButton{
+  padding: 1rem;
+}
+#settingsButton img{
+  filter: invert(.3);
+}
+
 #lessonProgress{
   display: flex;
   justify-content: center;

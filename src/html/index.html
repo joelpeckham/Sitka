@@ -9,13 +9,18 @@
   <link rel="stylesheet" href="../../node_modules/xterm/css/xterm.css" />
 </head>
 <body>
-  <input type="checkbox" id="drawer-toggle" name="drawer-toggle"/>
+  <input type="checkbox" id="drawer-toggle" name="drawer-toggle" checked/>
   <div id="drawer" class = "hasDrawerAnimation">
 
     <div id = "hiddenSection">
-      <ul id = "lessonList">
-        <li><a href="#">Lesson</a></li>
-      </ul>
+      <div id = menuGrid>
+        <div id = "settingsButton">
+          <img src="settingsIcon.svg" alt="Settings">
+        </div>
+        <ul id = "lessonList">
+          <li><a href="#">Lesson</a></li>
+        </ul>
+      </div>
     </div>
 
     <div id = "peekingSection">
@@ -45,6 +50,14 @@
   <script>
   require('./../js/sidebar.js')
   require('./../js/renderer.js')
+  </script>
+  <script>
+    const electron = require('electron');
+    const {ipcRenderer} = electron;
+    let settingsButton = document.getElementById('settingsButton');
+    settingsButton.addEventListener("click", () => {
+      ipcRenderer.send('item:add', "item");
+    });
   </script>
 </body>
 </html>
