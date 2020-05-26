@@ -69,7 +69,9 @@ function createAddWindow(){
     title:'Settings'
   });
   addWindow.loadFile('src/html/settings.html');
-
+  addWindow.on('close', function(){
+    addWindow = null;
+  });
 }
 
 // This method will be called when Electron has finished
